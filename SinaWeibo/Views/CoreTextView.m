@@ -11,7 +11,6 @@
 
 @interface CoreTextView ()
 
-@property (strong, nonatomic) NSTimer *drawTimer;
 @property (assign, nonatomic) UITouchPhase touchPhase;
 @property (assign, nonatomic) signed long touchIndex;
 
@@ -41,6 +40,25 @@
     }
 }
 
+NSRange NSRangeFromCFRange(CFRange range)
+{
+	return NSMakeRange((NSUInteger)range.location, (NSUInteger)range.length);
+}
+
+BOOL CTLineContainsCharactersFromStringRange(CTLineRef line, NSRange range)
+{
+	NSRange lineRange = NSRangeFromCFRange(CTLineGetStringRange(line));
+	NSRange intersectedRange = NSIntersectionRange(lineRange, range);
+	return (intersectedRange.length > 0);
+}
+
+BOOL CTRunContainsCharactersFromStringRange(CTRunRef run, NSRange range)
+{
+	NSRange runRange = NSRangeFromCFRange(CTRunGetStringRange(run));
+	NSRange intersectedRange = NSIntersectionRange(runRange, range);
+	return (intersectedRange.length > 0);
+}
+
 // Don't use this method for origins. Origins always depend on the height of the rect.
 CGPoint CGPointFlipped(CGPoint point, CGRect bounds) 
 {
@@ -58,16 +76,17 @@ CGRect CGRectFlipped(CGRect rect, CGRect bounds)
 CGRect getRunBounds(CTRunRef run, CTLineRef line, CGPoint lineOrigin) 
 {
     CGRect runBounds;
-    CGFloat ascent = (kContentTextSize + 3) * 0.8;
-    CGFloat descent = (kContentTextSize + 3) * 0.15;
-    // CGFloat leading;
+    CGFloat ascent = 0;
+    CGFloat descent = 0;
+    
+    CTLineGetTypographicBounds(line, &ascent, &descent, NULL);
     runBounds.size.width = CTRunGetTypographicBounds(run, 
                                                      CFRangeMake(0, 0), 
                                                      NULL,
                                                      NULL,
                                                      NULL);        
     runBounds.size.height = ascent + descent; 
-    CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringIndicesPtr(run)[0], NULL);
+    CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL);
     runBounds.origin.x = lineOrigin.x + xOffset;
     runBounds.origin.y = lineOrigin.y - descent;
     return runBounds;
@@ -90,10 +109,9 @@ CGRect getRunBounds(CTRunRef run, CTLineRef line, CGPoint lineOrigin)
             // 获取CTLine中的CTRun
             CTLineRef line = CFArrayGetValueAtIndex(lines, i);
             CFArrayRef runs = CTLineGetGlyphRuns(line);
-            
+
             for (int j = 0; j < CFArrayGetCount(runs); j++) {
                 CTRunRef run = CFArrayGetValueAtIndex(runs, j);
-                CFRange range = CTRunGetStringRange(run);
                 CGContextSetTextPosition(context, origins[i].x, origins[i].y);                
                 // 获取CTRun的属性
                 NSDictionary *attDic = (__bridge NSDictionary *)CTRunGetAttributes(run);
@@ -103,38 +121,27 @@ CGRect getRunBounds(CTRunRef run, CTLineRef line, CGPoint lineOrigin)
                     if (type == CustomGlyphURL || type == CustomGlyphAt || type == CustomGlyphTopic) {// 如果是绘制链接,@,##
                         // 先取出链接的文字范围，后算计算点击区域的时候要用
                         CGRect runBounds = getRunBounds(run, line, origins[i]);
-                        
                         NSValue *value = [attDic valueForKey:kCustomGlyphRangeAttributeName];
-                        NSRange _range = [value rangeValue];
-                        CFRange linkRange = CFRangeMake(_range.location, _range.length);
+                        NSRange linkRange = [value rangeValue];
                         
-                        // 我们先绘制背景，不然文字会被背景覆盖
-                        if (self.touchPhase == UITouchPhaseBegan) {// 点击开始
-                            if (isTouchRange(self.touchIndex, linkRange, range)) {// 如果点击区域落在链接区域内
-                                CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
+                        if (NSLocationInRange(self.touchIndex, linkRange)) {
+                            if (CTRunContainsCharactersFromStringRange(run, linkRange)) {
+                                if (self.touchPhase == UITouchPhaseBegan) {                               
+                                    CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
+                                } else {
+                                    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+                                }
                                 CGContextFillRect(context, runBounds);
-                            }
-                        } else {// 点击结束
-                            if (isTouchRange(self.touchIndex, linkRange, range)) {// 如果点击区域落在链接区域内
-                                CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-                                CGContextFillRect(context, runBounds);
-                            }
+                            } 
                         }
                         
-                        // 这里需要绘制下划线，记住CTRun是不会自动绘制下滑线的
-                        // 即使你设置了这个属性也不行
-                        // CTRun.h中已经做出了相应的说明
-                        // 所以这里的下滑线我们需要自己手动绘制
-                        CGContextSetStrokeColorWithColor(context, [UIColor purpleColor].CGColor);
-                        CGContextSetLineWidth(context, 0.5);
-                        CGContextMoveToPoint(context, runBounds.origin.x, runBounds.origin.y);
-                        CGContextAddLineToPoint(context, runBounds.origin.x + runBounds.size.width, runBounds.origin.y);
-                        CGContextStrokePath(context);
                     }
                 }
-                CTRunDraw(run, context, CFRangeMake(0, 0));
+                //CTRunDraw(run, context, CFRangeMake(0, 0));
             }
         }
+        
+        CTFrameDraw(textFrame, context);
     }
 }
 
@@ -157,7 +164,7 @@ CGRect getRunBounds(CTRunRef run, CTLineRef line, CGPoint lineOrigin)
     CTFramesetterRef framesetter = 
     CTFramesetterCreateWithAttributedString((__bridge CFMutableAttributedStringRef)_attributedString);
     CGMutablePathRef path = CGPathCreateMutable();
-    CFRange fitCFRange = CFRangeMake(0,0);
+    CFRange fitCFRange = CFRangeMake(0, 0);
     CGSize maxSize = CGSizeMake(_adjustWidth, CGFLOAT_MAX);
     CGSize sz = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,0), NULL, maxSize, &fitCFRange);
     _adjustSize = sz;
@@ -168,24 +175,6 @@ CGRect getRunBounds(CTRunRef run, CTLineRef line, CGPoint lineOrigin)
     
     CGPathRelease(path);
     CFRelease(framesetter);
-}
-
-Boolean CFRangesIntersect(CFRange range1, CFRange range2) {
-    CFIndex max_location = MAX(range1.location, range2.location);
-    CFIndex min_tail = MIN(range1.location + range1.length, range2.location + range2.length);
-    if (min_tail - max_location > 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_range) {
-    if (touch_range.location < index && touch_range.location + touch_range.length >= index) {
-        return CFRangesIntersect(touch_range, run_range);
-    } else {
-        return NO;
-    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event 
@@ -202,20 +191,15 @@ Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_range) {
     CFIndex tempIndex = kCFNotFound;
     for (int i = 0; i < CFArrayGetCount(lines); i++) {
         CTLineRef line = CFArrayGetValueAtIndex(lines, i);
-        CGFloat ascent;
-        CGFloat descent;
-        CGFloat leading;
-        CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
-        if ((origins[i].y - descent <= mirrorPoint.y) && 
-            (origins[i].y + ascent >= mirrorPoint.y)) {
+        CGFloat ascent = 0;
+        CGFloat descent = 0;
+        
+        double lineWidth = CTLineGetTypographicBounds(line, &ascent, &descent, NULL);
+        double whitespaceWidth = CTLineGetTrailingWhitespaceWidth(line);
+        CGRect lineRect = CGRectMake(origins[i].x, origins[i].y - descent, lineWidth - whitespaceWidth, ascent + descent);
+        if (CGRectContainsPoint(lineRect, mirrorPoint)) {
             tempIndex = CTLineGetStringIndexForPosition(line, mirrorPoint);
             self.touchPhase = touch.phase;
-            if (tempIndex >= [self.attributedString length]) {
-                CGFloat offset = CTLineGetOffsetForStringIndex(line, tempIndex, NULL);
-                if (mirrorPoint.x > offset) {
-                    tempIndex = kCFNotFound;
-                }
-            }
         }
     }
     self.touchIndex = tempIndex;
@@ -275,7 +259,6 @@ Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_range) {
         CFArrayRef runs = CTLineGetGlyphRuns(line);
         for (int j = 0; j < CFArrayGetCount(runs); j++) {
             CTRunRef run = CFArrayGetValueAtIndex(runs, j);
-            CFRange range = CTRunGetStringRange(run);          
             // 获取CTRun的属性
             NSDictionary *attDic = (__bridge NSDictionary *)CTRunGetAttributes(run);
             NSNumber *num = [attDic objectForKey:kCustomGlyphTypeAttributeName];
@@ -284,33 +267,36 @@ Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_range) {
                 if (type == CustomGlyphURL) {// 如果是绘制链接
                     // 先取出链接的文字范围，后算计算点击区域的时候要用
                     NSValue *value = [attDic valueForKey:kCustomGlyphRangeAttributeName];
-                    NSRange _range = [value rangeValue];
-                    CFRange linkRange = CFRangeMake(_range.location, _range.length);
-                    if (isTouchRange(self.touchIndex, linkRange, range)) {// 如果点击区域落在链接区域内
-                        if ([_delegate respondsToSelector:@selector(touchedURLWithURLStr:)]) {
-                            [_delegate touchedURLWithURLStr:[self.attributedString.string substringWithRange:_range]];
+                    NSRange linkRange = [value rangeValue];
+                    if (NSLocationInRange(self.touchIndex, linkRange)) {
+                        if (CTRunContainsCharactersFromStringRange(run, linkRange)) {
+                            if ([_delegate respondsToSelector:@selector(touchedURLWithURLStr:)]) {
+                                [_delegate touchedURLWithURLStr:[self.attributedString.string substringWithRange:linkRange]];
+                            }
+                            return;
                         }
-                        return;
                     }
                 } else if (type == CustomGlyphAt) {
                     NSValue *value = [attDic valueForKey:kCustomGlyphRangeAttributeName];
-                    NSRange _range = [value rangeValue];
-                    CFRange linkRange = CFRangeMake(_range.location, _range.length);
-                    if (isTouchRange(self.touchIndex, linkRange, range)) {// 如果点击区域落在链接区域内
-                        if ([_delegate respondsToSelector:@selector(touchedURLWithAtStr:)]) {
-                            [_delegate touchedURLWithAtStr:[self.attributedString.string substringWithRange:_range]];
+                    NSRange linkRange = [value rangeValue];
+                    if (NSLocationInRange(self.touchIndex, linkRange)) {
+                        if (CTRunContainsCharactersFromStringRange(run, linkRange)) {
+                            if ([_delegate respondsToSelector:@selector(touchedURLWithAtStr:)]) {
+                                [_delegate touchedURLWithAtStr:[self.attributedString.string substringWithRange:linkRange]];
+                            }
+                            return;
                         }
-                        return;
                     }
                 } else if (type == CustomGlyphTopic) {
                     NSValue *value = [attDic valueForKey:kCustomGlyphRangeAttributeName];
-                    NSRange _range = [value rangeValue];
-                    CFRange linkRange = CFRangeMake(_range.location, _range.length);
-                    if (isTouchRange(self.touchIndex, linkRange, range)) {// 如果点击区域落在链接区域内
-                        if ([_delegate respondsToSelector:@selector(touchedURLWithTopicStr:)]) {
-                            [_delegate touchedURLWithTopicStr:[self.attributedString.string substringWithRange:_range]];
+                    NSRange linkRange = [value rangeValue];
+                    if (NSLocationInRange(self.touchIndex, linkRange)) {
+                        if (CTRunContainsCharactersFromStringRange(run, linkRange)) {
+                            if ([_delegate respondsToSelector:@selector(touchedURLWithTopicStr:)]) {
+                                [_delegate touchedURLWithTopicStr:[self.attributedString.string substringWithRange:linkRange]];
+                            }
+                            return;
                         }
-                        return;
                     }
                 }
             }

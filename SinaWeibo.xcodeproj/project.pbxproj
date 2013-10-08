@@ -569,7 +569,7 @@
 				55A9F9C417C1C1AA0075C950 /* AppDelegate.h */,
 				55A9F9C517C1C1AA0075C950 /* AppDelegate.m */,
 				55E3033317F01BDD00C433E1 /* MainStoryboard.storyboard */,
-				55B4EC7517F16AAA0080D29E /* UI_Addition */,
+				55B4EC7517F16AAA0080D29E /* Additions */,
 				55A9F9E817C1C2EF0075C950 /* Views */,
 				55A9F9E617C1C25C0075C950 /* ViewControllers */,
 				55A9F9E717C1C2B00075C950 /* Models */,
@@ -702,10 +702,11 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		55B4EC7517F16AAA0080D29E /* UI_Addition */ = {
+		55B4EC7517F16AAA0080D29E /* Additions */ = {
 			isa = PBXGroup;
 			children = (
 			);
+			name = Additions;
 			path = UI_Addition;
 			sourceTree = "<group>";
 		};

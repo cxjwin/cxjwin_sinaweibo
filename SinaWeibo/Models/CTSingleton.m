@@ -108,6 +108,9 @@ static CTSingleton *singleton = nil;
         [newStr addAttribute:kCustomGlyphRangeAttributeName
                        value:[NSValue valueWithRange:_range] 
                        range:_range];
+        [newStr addAttribute:NSForegroundColorAttributeName 
+                       value:[UIColor blueColor] 
+                       range:_range];
     }
     
     // 匹配@
@@ -129,6 +132,9 @@ static CTSingleton *singleton = nil;
         [newStr addAttribute:kCustomGlyphRangeAttributeName
                        value:[NSValue valueWithRange:_range] 
                        range:_range];
+        [newStr addAttribute:NSForegroundColorAttributeName 
+                       value:[UIColor purpleColor] 
+                       range:_range];
     }
     
     // 匹配＃＃
@@ -149,6 +155,9 @@ static CTSingleton *singleton = nil;
                        range:_range];
         [newStr addAttribute:kCustomGlyphRangeAttributeName
                        value:[NSValue valueWithRange:_range] 
+                       range:_range];
+        [newStr addAttribute:NSForegroundColorAttributeName 
+                       value:[UIColor purpleColor]
                        range:_range];
     }
     

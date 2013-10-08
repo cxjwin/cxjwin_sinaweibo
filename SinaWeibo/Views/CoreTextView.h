@@ -7,7 +7,6 @@
 //
 
 #import <CoreText/CoreText.h>
-#import <UIKit/UIKit.h>
 #import "CTSingleton.h"
 
 #define kGifMaxFrames 50
@@ -27,6 +26,5 @@
 @property (readonly, nonatomic) CGSize adjustSize;
 
 - (void)updateFrameWithAttributedString;
-inline Boolean CFRangesIntersect(CFRange range1, CFRange range2);
 
 @end

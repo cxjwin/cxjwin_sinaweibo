@@ -395,11 +395,11 @@
 
 - (void)pushWebViewController:(NSNotification *)notification
 {
-    NSString *urlStr = notification.object;
-    WBWebViewController *viewController = 
-    (id)[self.storyboard instantiateViewControllerWithIdentifier:@"WBWebViewController"];
-    viewController.urlStr = urlStr;
-    [self.navigationController pushViewController:viewController animated:YES];
+//    NSString *urlStr = notification.object;
+//    WBWebViewController *viewController = 
+//    (id)[self.storyboard instantiateViewControllerWithIdentifier:@"WBWebViewController"];
+//    viewController.urlStr = urlStr;
+//    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)showOriginalPic:(NSNotification *)notification
