@@ -1,0 +1,19 @@
+PODS:
+  - FMDB (2.1):
+    - FMDB/standard
+  - FMDB/common (2.1)
+  - FMDB/standard (2.1):
+    - FMDB/common
+  - SDWebImage (3.4):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.4)
+
+DEPENDENCIES:
+  - FMDB
+  - SDWebImage
+
+SPEC CHECKSUMS:
+  FMDB: 2769004a271eae0bbd8bd4f45a3f2acfd0d3df0e
+  SDWebImage: 366188f04c019bfd712d45e3b36aa52070f4abd8
+
+COCOAPODS: 0.22.3
