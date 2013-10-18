@@ -18,45 +18,82 @@ NSString *const kTouchedURLNotification = @"kTouchedURLNotification";
 NSString *const kViewControllerWillPush = @"kViewControllerWillPush";
 NSString *const kShowOriginalPicNotification = @"kShowOriginalPicNotification";
 NSString *const kThumbnailPicLoadedNotification = @"kThumbnailPicLoadedNotification";
+
 static const int kImageViewBaseTag = 110;
 
 @interface StatusView ()<CoreTextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *avatarView;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *sourceLabel;
-@property (weak, nonatomic) IBOutlet CoreTextView *textView;
-@property (weak, nonatomic) IBOutlet SeparateView *separateView;
-@property (weak, nonatomic) IBOutlet CoreTextView *reTextView;
+@property (strong, nonatomic) UIImageView *avatarView;
+@property (strong, nonatomic) UILabel *nameLabel;
+@property (strong, nonatomic) UILabel *sourceLabel;
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UIView *imagesView;
+@property (strong, nonatomic) CoreTextView *textView;
+@property (strong, nonatomic) SeparateView *separateView;
+@property (strong, nonatomic) CoreTextView *reTextView;
 
-@property (weak, nonatomic) IBOutlet UIButton *reTweetButton;
-@property (weak, nonatomic) IBOutlet UIButton *commentButton;
-@property (weak, nonatomic) IBOutlet UIButton *praiseButton;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UIView *imagesView;
 
-@property (strong, nonatomic) UIDynamicAnimator *animator;
+@property (strong, nonatomic) UIButton *retweetButton;
+@property (strong, nonatomic) UIButton *commentButton;
+@property (strong, nonatomic) UIButton *praiseButton;
 
 @end
 
-@implementation StatusView {
+@implementation StatusView 
+{
     BOOL hasRetweetedStatus;
     NSUInteger picCount;
-    CGRect reTweetButtonBounds;
 }
 
-- (void)awakeFromNib 
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self.textView.delegate = self;
-    self.reTextView.delegate = self;
-    
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)commonInit
+{
+    self.avatarView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.avatarView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapAvatar = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAvatar:)];
     [self.avatarView addGestureRecognizer:tapAvatar];
+    [self addSubview:self.avatarView];
     
-    UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)];
-    [self.imageView addGestureRecognizer:tapImage];
+    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.nameLabel.font = [UIFont systemFontOfSize:16];
+    [self addSubview:self.nameLabel];
     
+    self.sourceLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.sourceLabel.font = [UIFont systemFontOfSize:13];
+    [self addSubview:self.sourceLabel];
+    
+    self.textView = [[CoreTextView alloc] initWithFrame:CGRectZero];
+    self.textView.backgroundColor = [UIColor clearColor];
+    self.textView.delegate = self;
+    [self addSubview:self.textView];
+    
+    self.separateView = [[SeparateView alloc] initWithFrame:CGRectZero];
+    [self addSubview:self.separateView];
+    
+    self.reTextView = [[CoreTextView alloc] initWithFrame:CGRectZero];
+    self.reTextView.backgroundColor = [UIColor clearColor];
+    self.reTextView.delegate = self;
+    [self addSubview:self.reTextView];
+    
+    self.imagesView = [[UIView alloc] initWithFrame:CGRectZero];
     for (int i = 0; i < 9; i++) {
         int column = i % 3;
         int row = i / 3;
@@ -66,11 +103,30 @@ static const int kImageViewBaseTag = 110;
     }
     UITapGestureRecognizer *tapImages = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImages:)];
     [self.imagesView addGestureRecognizer:tapImages];
+    [self addSubview:self.imagesView];
     
-    [self.reTweetButton addTarget:self action:@selector(reTweetStatus:) forControlEvents:UIControlEventTouchUpInside];
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.imageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)];
+    [self.imageView addGestureRecognizer:tapImage];
+    [self addSubview:self.imageView];
+    
+    self.retweetButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.retweetButton setTitle:@"转发" forState:UIControlStateNormal];
+    [self.retweetButton addTarget:self action:@selector(reTweetStatus:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.retweetButton];
+    
+    self.commentButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.commentButton setTitle:@"评论" forState:UIControlStateNormal];
     [self.commentButton addTarget:self action:@selector(commentStatus) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.commentButton];
+    
+    self.praiseButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.praiseButton setTitle:@"赞" forState:UIControlStateNormal];
     [self.praiseButton addTarget:self action:@selector(praiseStatus) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.praiseButton];
 }
+
 
 - (void)reTweetStatus:(id)sender
 {
@@ -154,8 +210,7 @@ static const int kImageViewBaseTag = 110;
     
     // tool bar
     top = top + 5;
-    self.reTweetButton.frame = CGRectMake(20, top, 40, 16);
-    reTweetButtonBounds = self.reTweetButton.bounds;
+    self.retweetButton.frame = CGRectMake(20, top, 40, 16);
     self.commentButton.frame = CGRectMake(140, top, 40, 16);
     self.praiseButton.frame = CGRectMake(260, top, 40, 16);
 }
@@ -280,59 +335,6 @@ static const int kImageViewBaseTag = 110;
         self.imagesView.hidden = YES;
     }
     [self setNeedsLayout];
-    
-//    WeiboStatus *picStatus = (status.retweetedStatus != nil ? status.retweetedStatus : status);
-//    NSURL *picUrl = nil;
-//    picCount = [picStatus.picUrls count];
-//    if (picCount > 0) {
-//        if (picCount == 1) {
-//            picUrl = [NSURL URLWithString:[[picStatus.picUrls objectAtIndex:0] objectForKey:@"thumbnail_pic"]];
-//        } else {
-//            picUrl = [NSURL URLWithString:[[picStatus.picUrls objectAtIndex:0] objectForKey:@"thumbnail_pic"]];
-//        }
-//    } else {
-//        if (picStatus.thumbnailPic) {
-//            picCount = 1;
-//            picUrl = [NSURL URLWithString:picStatus.thumbnailPic];
-//        } else if (picStatus.bmiddlePic) {
-//            picCount = 1;
-//            picUrl = [NSURL URLWithString:picStatus.bmiddlePic];
-//        } else if (picStatus.originalPic) {
-//            picCount = 1;
-//            picUrl = [NSURL URLWithString:picStatus.originalPic];
-//        } else {
-//            picCount = 0;
-//        }
-//    }
-//    
-//    if (picCount > 0) {
-//        self.imagesView.hidden = NO;
-//    } else {
-//        self.imagesView.hidden = YES;
-//    }
-    
-//    if (picUrl) {
-//        SDWebImageManager *manager = [SDWebImageManager sharedManager];
-//        UIImage *image = [manager.imageCache imageFromMemoryCacheForKey:[picUrl absoluteString]];
-//        if (image) {
-//            self.imageView.image = image;
-//        } else {
-//            self.imageView.image = nil;
-//            __weak typeof(self) weak_self = self;
-//            [manager downloadWithURL:picUrl
-//                             options:SDWebImageCacheMemoryOnly
-//                            progress:nil
-//                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-//                               if (image) {
-//                                   // do something with image
-//                                   [[NSNotificationCenter defaultCenter] postNotificationName:kThumbnailPicLoadedNotification object:nil];
-//                                   dispatch_async(dispatch_get_main_queue(), ^{
-//                                       weak_self.imageView.image = image;
-//                                   });
-//                               }
-//                           }];
-//        }
-//    }
 }
 
 #pragma mark - 

@@ -28,7 +28,7 @@ typedef void(^DownloadCompletionHandler)(NSURL *location, NSURLResponse *respons
     NSURLSessionDelegate,
     NSURLSessionTaskDelegate, 
     NSURLSessionDataDelegate,
-    NSURLSessionDownloadDelegate, 
+    NSURLSessionDownloadDelegate,
     NSURLConnectionDelegate>
 
 @property (strong, nonatomic) NSOperationQueue *operationQueue;
@@ -41,6 +41,7 @@ typedef void(^DownloadCompletionHandler)(NSURL *location, NSURLResponse *respons
 - (void)getAccessTokenWithAuthorizationCode:(NSString *)code completionHandler:(DataCompletionHandler)handler;
 - (void)getUserInfoWithID:(NSString *)userID completionHandler:(DataCompletionHandler)handler;
 - (void)getWeiboStatusesWithPage:(int)page completionHandler:(DataCompletionHandler)handler;
+
 // download methods
 - (void)downloadImageWithURL:(NSURL *)URL downloadCompletionHandler:(DataCompletionHandler)handler;
 

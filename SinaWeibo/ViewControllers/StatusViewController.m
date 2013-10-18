@@ -191,6 +191,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *indentifier = @"StatusCell";
     StatusCell *cell = (StatusCell *)[tableView dequeueReusableCellWithIdentifier:indentifier];
+    if (cell == nil) {
+        cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
     
 #ifdef DEBUG
     assert(indexPath.row < [self.statuses count]);
@@ -405,11 +409,24 @@
 - (void)showOriginalPic:(NSNotification *)notification
 {
     WeiboStatus *status = notification.object;
-    NSString *urlStr = [status originalPic];
-    WBWebViewController *viewController =
-    (id)[self.storyboard instantiateViewControllerWithIdentifier:@"WBWebViewController"];
-    viewController.urlStr = urlStr;
-    [self.navigationController pushViewController:viewController animated:YES];
+    WeiboStatus *picStatus = (status.retweetedStatus != nil ? status.retweetedStatus : status);
+    
+    NSUInteger picCount = [picStatus.picUrls count];
+    if (picCount > 1) {
+        NSMutableArray *picURLs = [NSMutableArray array];
+        for (NSDictionary *dict in picStatus.picUrls) {
+            NSURL *picURL = [NSURL URLWithString:[dict objectForKey:@"thumbnail_pic"]];
+            [picURLs addObject:picURL];
+        }
+    } else {
+
+    }
+
+//    NSString *urlStr = [picStatus originalPic];
+//    WBWebViewController *viewController =
+//    (id)[self.storyboard instantiateViewControllerWithIdentifier:@"WBWebViewController"];
+//    viewController.urlStr = urlStr;
+//    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)thumbnailPicLoaded:(NSNotification *)notification

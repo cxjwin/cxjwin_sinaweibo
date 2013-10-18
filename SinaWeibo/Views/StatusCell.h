@@ -11,6 +11,6 @@
 
 @interface StatusCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet StatusView *statusView;
+@property (strong, nonatomic) StatusView *statusView;
 
 @end

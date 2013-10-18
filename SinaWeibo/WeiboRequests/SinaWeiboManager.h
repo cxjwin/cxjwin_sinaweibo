@@ -21,7 +21,11 @@ extern NSString *const kWeiboUserInfoDidUpdateNotification;
 
 @protocol SinaWeiboDelegate;
 @class WeiboUser;
-@interface SinaWeiboManager : NSObject <SinaWeiboAuthorizeViewDelegate>
+@interface SinaWeiboManager : NSObject <
+    SinaWeiboAuthorizeViewDelegate,
+NSURLSessionDelegate,
+NSURLSessionTaskDelegate, 
+NSURLSessionDataDelegate>
 
 // account info
 @property (copy, nonatomic) NSString *accessToken;

@@ -18,23 +18,25 @@ extern NSString *const kCustomGlyphRangeAttributeName;
 extern NSString *const kCustomGlyphImageAttributeName;
 extern NSString *const kCustomGlyphInfoAttribute;
 
-typedef enum CustomGlyphType {
-  CustomGlyphURL = 0,
-  CustomGlyphAt,
-  CustomGlyphTopic,
-  CustomGlyphImage,
-  CustomGlyphGif,
-  CustomGlyphInfoImage
-}CustomGlyphType;
+typedef NS_ENUM(uint32_t, CustomGlyphType) 
+{
+    CustomGlyphURL = 0,
+    CustomGlyphAt,
+    CustomGlyphTopic,
+    CustomGlyphImage,
+    CustomGlyphGif,
+    CustomGlyphInfoImage
+};
 
-typedef struct CustomGlyphMetrics {
-  CGFloat ascent;
-  CGFloat descent;
-  CGFloat width;
-}CustomGlyphMetrics, *CustomGlyphMetricsRef;
+typedef struct CustomGlyphMetrics 
+{
+    CGFloat ascent;
+    CGFloat descent;
+    CGFloat width;
+} CustomGlyphMetrics, *CustomGlyphMetricsRef;
 
 @interface GifObject : NSObject
- 
+
 @property (strong, nonatomic) NSMutableArray *animationImages;
 @property (assign, nonatomic) NSTimeInterval intervalTime;
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5789DEFF-DF09-44B8-A097-F5322AA5F01B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SinaWeibo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8E958D86-7368-499F-9D87-F87D1160FCA1</key>
+		<string>https://github.com/cxjwin/cxjwin_sinaweibo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SinaWeibo.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8E958D86-7368-499F-9D87-F87D1160FCA1</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/cxjwin/cxjwin_sinaweibo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8E958D86-7368-499F-9D87-F87D1160FCA1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8E958D86-7368-499F-9D87-F87D1160FCA1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>cxjwin_sinaweibo</string>
+		</dict>
+	</array>
+</dict>
+</plist>

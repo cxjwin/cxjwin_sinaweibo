@@ -22,6 +22,15 @@
     CFRange touchRange;
 }
 
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
 - (void)awakeFromNib 
 {
     [self commonInit];
@@ -147,7 +156,8 @@ CGRect getRunBounds(CTRunRef run, CTLineRef line, CGPoint lineOrigin)
 
 #pragma mark -
 #pragma mark - setters
-- (void)setAttributedString:(NSMutableAttributedString *)attributedString {
+- (void)setAttributedString:(NSMutableAttributedString *)attributedString 
+{
     if (_attributedString != attributedString) {
         _attributedString = attributedString;
         
@@ -156,7 +166,8 @@ CGRect getRunBounds(CTRunRef run, CTLineRef line, CGPoint lineOrigin)
     }
 }
 
-- (void)updateFrameWithAttributedString {
+- (void)updateFrameWithAttributedString 
+{
     if (textFrame) {
         CFRelease(textFrame), textFrame = NULL;
     }
@@ -165,7 +176,7 @@ CGRect getRunBounds(CTRunRef run, CTLineRef line, CGPoint lineOrigin)
     CTFramesetterCreateWithAttributedString((__bridge CFMutableAttributedStringRef)_attributedString);
     CGMutablePathRef path = CGPathCreateMutable();
     CFRange fitCFRange = CFRangeMake(0, 0);
-    CGSize maxSize = CGSizeMake(_adjustWidth, CGFLOAT_MAX);
+    CGSize maxSize = CGSizeMake(self.adjustWidth, CGFLOAT_MAX);
     CGSize sz = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,0), NULL, maxSize, &fitCFRange);
     _adjustSize = sz;
     CGRect rect = (CGRect){CGPointZero, sz};

@@ -74,7 +74,6 @@ static CGSize sizeWithGifData(NSData *data)
     [data getBytes:&h1 range:NSMakeRange(2, 1)];
     [data getBytes:&h2 range:NSMakeRange(3, 1)];
     short h = h1 + (h2 << 8);
-    WBLog(@"==== %d, %d", w, h);
     return CGSizeMake(w, h);
 }
 

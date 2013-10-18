@@ -15,6 +15,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.statusView = [[StatusView alloc] initWithFrame:CGRectZero];
+        [self.contentView addSubview:self.statusView];
     }
     return self;
 }
