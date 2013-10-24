@@ -26,11 +26,13 @@
     return self;
 }
 
-- (void)dealloc {
+- (void)dealloc 
+{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kSinaWeiboDidLogInNotification object:nil];
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sinaWeiboDidLogIn) name:kSinaWeiboDidLogInNotification object:nil];
