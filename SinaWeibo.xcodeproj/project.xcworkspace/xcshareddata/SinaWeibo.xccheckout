@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>C07208BB-A9B9-4C83-96D8-C4353732E15E</string>
+	<string>0F86F2DC-7DD7-4AFB-93F1-81E0167F54F5</string>
 	<key>IDESourceControlProjectName</key>
 	<string>SinaWeibo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,11 +14,11 @@
 		<string>https://github.com/cxjwin/cxjwin_sinaweibo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>SinaWeibo.xcworkspace</string>
+	<string>SinaWeibo.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>BBE4CC6D-822B-4C36-AFDF-5383EF1018C6</key>
-		<string>..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/cxjwin/cxjwin_sinaweibo.git</string>

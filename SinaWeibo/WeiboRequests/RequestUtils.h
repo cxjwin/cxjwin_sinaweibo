@@ -11,7 +11,7 @@
 
 #define kAppKey             @"1372038092"
 #define kAppSecret          @"4740bf09be7e855f7813c69b0a040382"
-#define kAppRedirectURI     @"http://www.cnblogs.com/cxjwin/"
+#define kAppRedirectURI     @"http://cxjwin.github.io"
 
 @interface RequestUtils : NSObject
 

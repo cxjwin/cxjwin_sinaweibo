@@ -21,7 +21,7 @@
 @property (strong, nonatomic) NSDictionary *authParams;
 
 @property (strong, nonatomic) UIWebView *webView;
-@property (nonatomic, assign) id<SinaWeiboAuthorizeViewDelegate> delegate;
+@property (weak, nonatomic) id<SinaWeiboAuthorizeViewDelegate> delegate;
 
 - (id)initWithAuthParams:(NSDictionary *)params
                 delegate:(id<SinaWeiboAuthorizeViewDelegate>)delegate;

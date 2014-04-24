@@ -8,15 +8,56 @@
 
 #import <UIKit/UIKit.h>
 #import <SDWebImage/SDWebImageManager.h>
+#import "CoreTextView.h"
+#import "SeparateView.h"
 
-extern NSString *const kShowUserInfoNotification;
-extern NSString *const kTouchedURLNotification;
 extern NSString *const kShowOriginalPicNotification;
 extern NSString *const kThumbnailPicLoadedNotification;
 
-@class WeiboStatus;
-@interface StatusView : UIView
+typedef NS_ENUM(NSUInteger, StatusActionType) {
+    ShowUserInfo = 0,
+    LinkToURL,
+    ShowOriginalPic,
+    ThumbnailPicDidLoad,
+    RetweetStatus,
+    CommentStatus,
+    PraiseStatus,
+};
 
-@property (strong, nonatomic) WeiboStatus *status;
+@class WeiboStatus;
+
+@interface StatusView : UIView <CoreTextViewDelegate>
+
+// 头像
+@property (nonatomic, strong) UIImageView *avatarView;
+// 昵称
+@property (nonatomic, strong) UILabel *nameLabel;
+// 来源平台
+@property (nonatomic, strong) UILabel *sourceLabel;
+
+// 微博内容
+@property (nonatomic, strong) CoreTextView *textView;
+// 分割线
+@property (nonatomic, strong) SeparateView *separateView;
+// 转发内容
+@property (nonatomic, strong) CoreTextView *reTextView;
+
+// 单张图片
+@property (nonatomic, strong) UIImageView *imageView;
+// 多张图片
+@property (nonatomic, strong) UIView *imagesView;
+
+// 转发按钮
+@property (nonatomic, strong) UIButton *retweetButton;
+// 评论按钮
+@property (nonatomic, strong) UIButton *commentButton;
+// 点赞
+@property (nonatomic, strong) UIButton *praiseButton;
+
+// 微博状态
+@property (nonatomic, strong) WeiboStatus *status;
+
+// 操作回调Block
+@property (nonatomic, copy) void (^statusAction)(StatusView *statusView, id info, StatusActionType actionType);
 
 @end

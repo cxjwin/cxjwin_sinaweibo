@@ -39,7 +39,7 @@
     CGContextSetStrokeColorWithColor(context, [UIColor greenColor].CGColor);
     CGContextSetLineWidth(context, 0.5);
     
-    CGFloat lineY = CGRectGetHeight(rect) * 0.5;
+    CGFloat lineY = CGRectGetHeight(rect) * 0.5 + 0.25;
     CGContextMoveToPoint(context, 0, lineY);
     CGContextAddLineToPoint(context, CGRectGetWidth(rect) * 0.5 - 15, lineY);
 

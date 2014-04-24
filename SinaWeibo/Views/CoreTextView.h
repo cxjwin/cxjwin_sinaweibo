@@ -7,24 +7,42 @@
 //
 
 #import <CoreText/CoreText.h>
-#import "CTSingleton.h"
+#import <UIKit/UIKit.h>
 
-#define kGifMaxFrames 50
+NS_INLINE Boolean CFRangesIntersect(CFRange range1, CFRange range2) {
+	CFIndex max_location = MAX(range1.location, range2.location);
+	CFIndex min_tail = MIN(range1.location + range1.length, range2.location + range2.length);
+    return (min_tail - max_location > 0) ? TRUE : FALSE;
+}
 
-@protocol CoreTextViewDelegate <NSObject>
-@optional
-- (void)touchedURLWithURLStr:(NSString *)urlStr;
-- (void)touchedURLWithAtStr:(NSString *)atStr;
-- (void)touchedURLWithTopicStr:(NSString *)topicStr;
-@end
+NS_INLINE CFRange CFRangeFromNSRange(NSRange source) {
+	return CFRangeMake(source.location, source.length);
+}
+
+NS_INLINE Boolean CFLocationInRange(CFIndex loc, CFRange range) {
+	return (!(loc < range.location) && (loc - range.location) < range.length) ? TRUE : FALSE;
+}
+
+extern CGFloat kContentTextWidth;
+
+@protocol CoreTextViewDelegate;
 
 @interface CoreTextView : UIView
 
 @property (weak, nonatomic) id<CoreTextViewDelegate> delegate;
-@property (copy, nonatomic) NSMutableAttributedString *attributedString;
-@property (assign, nonatomic) CGFloat adjustWidth;
-@property (readonly, nonatomic) CGSize adjustSize;
 
-- (void)updateFrameWithAttributedString;
+@property (copy, nonatomic) NSMutableAttributedString *attributedString;
+
+@end
+
+@protocol CoreTextViewDelegate <NSObject>
+
+@optional
+// link
+- (void)touchedURLWithURLStr:(NSString *)urlStr;
+// @??
+- (void)touchedURLWithAtStr:(NSString *)atStr;
+// #??#
+- (void)touchedURLWithTopicStr:(NSString *)topicStr;
 
 @end

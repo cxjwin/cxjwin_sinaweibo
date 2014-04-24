@@ -26,7 +26,7 @@ typedef void(^DownloadCompletionHandler)(NSURL *location, NSURLResponse *respons
 
 @interface SinaWeiboCommunicator : NSObject <
     NSURLSessionDelegate,
-    NSURLSessionTaskDelegate, 
+    NSURLSessionTaskDelegate,
     NSURLSessionDataDelegate,
     NSURLSessionDownloadDelegate,
     NSURLConnectionDelegate>

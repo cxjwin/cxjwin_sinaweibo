@@ -9,8 +9,8 @@
 #import <objc/runtime.h>
 #import "WeiboStatus+Builder.h"
 #import "WeiboUser+Builder.h"
-#import "CTSingleton.h"
-
+#import "NSMutableAttributedString+Weibo.h"
+#import "CoreTextView.h"
 
 static CGSize sizeWithJpgData(NSData *data)
 {
@@ -138,9 +138,9 @@ static const char *preview_image_size_key = "preview_image_size_key";
     self.mid = [info objectForKey:@"mid"];
     self.text = [info objectForKey:@"text"];
     if ([self.text length] > 0) {
-        NSMutableAttributedString *attributedText = [[CTSingleton sharedInstance] transformText:self.text];
+        NSMutableAttributedString *attributedText = [NSMutableAttributedString weiboAttributedStringWithString:self.text];
         self.attributedText = attributedText;
-        self.contentTextSize = [[CTSingleton sharedInstance] sizeValueWithAttributedText:attributedText];
+        self.contentTextSize = [NSValue valueWithCGSize:[attributedText adjustSizeWithMaxWidth:kContentTextWidth]];
     }
     
     NSString *source = [info objectForKey:@"source"];

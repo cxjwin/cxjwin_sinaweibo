@@ -10,7 +10,6 @@
 #import "SinaWeiboManager.h"
 #import "WeiboUser+Builder.h"
 #import "WeiboStatus+Builder.h"
-#import "StatusCell.h"
 
 #define kAvatarViewTag 201
 const NSUInteger kNumberOfSections = 5;
@@ -147,9 +146,15 @@ const NSUInteger kNumberOfSections = 5;
     switch (indexPath.section) {
         case 0:
         {
-            StatusCell *_cell = (StatusCell *)[tableView dequeueReusableCellWithIdentifier:indentifier_1];
-            _cell.statusView.status = self.latestStatus;
-            cell = _cell;
+//            StatusCell *_cell = (StatusCell *)[tableView dequeueReusableCellWithIdentifier:indentifier_1];
+//            _cell.statusView.status = self.latestStatus;
+//            cell = _cell;
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier_1];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indentifier_1];
+            }
+            
+            return cell;
         }
             break;
             
