@@ -7,20 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WeiboStatus.h"
+#import "WBGraphStatus.h"
 #import "ImagesManager.h"
 
 extern CGFloat kTextWidth;
 
-typedef NS_ENUM(NSUInteger, DisplayImageType) {
-    DisplayNoImage = 0,
-    DisplaySingleImage,
-    DisplaySeveralImages,
+typedef NS_ENUM (NSUInteger, DisplayImageType) {
+	DisplayNoImage = 0,
+	DisplaySingleImage,
+	DisplaySeveralImages,
 };
 
 @interface WeiboUIStatus : NSObject
 
-@property (nonatomic, strong) WeiboStatus *status;
+@property (nonatomic, readonly, strong) id <WBGraphStatus> status;
 
 @property (nonatomic, assign, readonly) CGFloat contentHeight;
 
@@ -38,6 +38,6 @@ typedef NS_ENUM(NSUInteger, DisplayImageType) {
 
 @property (nonatomic, assign, readonly) ImagesManager *imagesManager;
 
-- (instancetype)initWithStatus:(WeiboStatus *)status;
+- (instancetype)initWithStatus:(id <WBGraphStatus> )status;
 
 @end

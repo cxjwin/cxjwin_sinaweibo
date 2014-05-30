@@ -19,40 +19,35 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self)
-	{
+	if (self) {
 		// Custom initialization
 	}
+
 	return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kSinaWeiboDidLogInNotification object:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sinaWeiboDidLogIn) name:kSinaWeiboDidLogInNotification object:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[[SinaWeiboManager defaultManager] loginIn];
 }
 
-- (void)sinaWeiboDidLogIn
-{
+- (void)sinaWeiboDidLogIn {
 	dispatch_async(dispatch_get_main_queue(), ^{
-					   [self performSegueWithIdentifier:@"TabBarControllerSegue" sender:nil];
-				   });
+	    [self performSegueWithIdentifier:@"TabBarControllerSegue" sender:nil];
+	});
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
 }

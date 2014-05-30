@@ -1,19 +1,46 @@
 PODS:
-  - FMDB (2.1):
+  - AFNetworking (2.2.4):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.2.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.2.4):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.2.4)
+  - AFNetworking/Security (2.2.4)
+  - AFNetworking/Serialization (2.2.4)
+  - AFNetworking/UIKit (2.2.4):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - FMDB (2.3):
     - FMDB/standard
-  - FMDB/common (2.1)
-  - FMDB/standard (2.1):
+  - FMDB/common (2.3)
+  - FMDB/standard (2.3):
     - FMDB/common
-  - SDWebImage (3.4):
+  - OCMock (2.2.4)
+  - OHHTTPStubs (3.1.2)
+  - SDWebImage (3.6):
     - SDWebImage/Core
-  - SDWebImage/Core (3.4)
+  - SDWebImage/Core (3.6)
 
 DEPENDENCIES:
+  - AFNetworking (~> 2.0)
   - FMDB
+  - OCMock
+  - OHHTTPStubs
   - SDWebImage
 
 SPEC CHECKSUMS:
-  FMDB: 2769004a271eae0bbd8bd4f45a3f2acfd0d3df0e
-  SDWebImage: 366188f04c019bfd712d45e3b36aa52070f4abd8
+  AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
+  FMDB: 31ec26773c7f7b7890a6038235a1f2bbd933a7cb
+  OCMock: 6db79185520e24f9f299548f2b8b07e41d881bd5
+  OHHTTPStubs: c1c2007839687eaf9b80f061ce84440515080ebb
+  SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
 
-COCOAPODS: 0.22.3
+COCOAPODS: 0.33.1

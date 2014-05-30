@@ -19,12 +19,14 @@ NS_INLINE CGPoint CGPointFlipped(CGPoint point, CGRect bounds) {
 	return CGPointMake(point.x, CGRectGetMaxY(bounds) - point.y);
 }
 
+/*
 NS_INLINE CGRect CGRectFlipped(CGRect rect, CGRect bounds) {
 	return CGRectMake(CGRectGetMinX(rect),
 	                  CGRectGetMaxY(bounds) - CGRectGetMaxY(rect),
 	                  CGRectGetWidth(rect),
 	                  CGRectGetHeight(rect));
 }
+*/
 
 static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_range) {
 	if (touch_range.location < index && touch_range.location + touch_range.length >= index) {

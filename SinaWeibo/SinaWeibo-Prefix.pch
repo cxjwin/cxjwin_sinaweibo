@@ -18,5 +18,5 @@
 #ifdef DEBUG
 #define WBLog(format, ...) NSLog(@"%s(%d): " format, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
-#define WBLog(...) {}
+#define WBLog(...) ((void)0)
 #endif

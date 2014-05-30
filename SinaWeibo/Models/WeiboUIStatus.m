@@ -96,6 +96,8 @@ static inline CGSize sizeWithGifData(NSData *data) {
 
 @interface WeiboUIStatus ()
 
+@property (nonatomic, strong, readwrite) id <WBGraphStatus> status;
+
 @property (nonatomic, assign, readwrite) CGFloat contentHeight;
 
 @property (nonatomic, copy, readwrite) NSMutableAttributedString *attributedText;
@@ -118,44 +120,48 @@ static inline CGSize sizeWithGifData(NSData *data) {
 
 @implementation WeiboUIStatus
 
-- (instancetype)initWithStatus:(WeiboStatus *)status {
-    self = [super init];
-    if (self) {
-        self.status = status;
-    
-        self.emojiDict = [NSMutableAttributedString weiboEmojiDictionary];
-        
-        CGFloat contentHeight = 0.0;
-        
-        if (status.text && [status.text length] > 0) {
-            
-        } else {
-            NSAssert(NO, @"No Content in this status");
-        }
-        
-        if (status.retweetedStatus.text && [status.retweetedStatus.text length] > 0) {
-            
-        }
-        
-        NSArray *imageURLs = status.picUrls;
-        if (!imageURLs || [imageURLs count] == 0) {
-            imageURLs = status.retweetedStatus.picUrls;
-        }
-        
-        if (!imageURLs || [imageURLs count] == 0) {
-            self.displayImageType = DisplayNoImage;
-            self.displayImageSize = CGSizeZero;
-        } else if ([imageURLs count] == 1) {
-            self.displayImageType = DisplaySingleImage;
-            self.displayImageSize = CGSizeMake(100, 100);
-        } else if ([imageURLs count] > 1) {
-            self.displayImageType = DisplaySeveralImages;
-            self.displayImageSize = CGSizeMake(64, 64);
-        } else {
-            NSAssert(NO, @"No this kind");
-        }
-    }
-    return self;
+- (instancetype)initWithStatus:(id <WBGraphStatus> )status {
+	self = [super init];
+	if (self) {
+		self.status = status;
+
+		self.emojiDict = [NSMutableAttributedString weiboEmojiDictionary];
+
+		CGFloat contentHeight = 0.0;
+
+		if (status.text && [status.text length] > 0) {
+		} else {
+			NSAssert(NO, @"No Content in this status");
+		}
+
+		if ([[status retweeted_status] text] && [[[status retweeted_status] text] length] > 0) {
+		}
+
+		NSArray *imageURLs = [status pic_urls];
+		NSUInteger count = [imageURLs count];
+		if (!imageURLs || count == 0) {
+			imageURLs = [[status retweeted_status] pic_urls];
+			count = [imageURLs count];
+		}
+
+		if (!imageURLs || count) {
+			self.displayImageType = DisplayNoImage;
+			self.displayImageSize = CGSizeZero;
+		} else if (count == 1) {
+			self.displayImageType = DisplaySingleImage;
+			self.displayImageSize = CGSizeMake(100, 100);
+		} else if (count > 1) {
+			self.displayImageType = DisplaySeveralImages;
+			self.displayImageSize = CGSizeMake(64, 64);
+			CGFloat imageWidth = 64.0;
+			for (NSUInteger i = 0; i < count; ++i) {
+			}
+		} else {
+			NSAssert(NO, @"No this kind");
+		}
+	}
+
+	return self;
 }
 
 @end

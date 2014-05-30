@@ -125,7 +125,7 @@
  consume graph objects. While the `FBGraphObject` class implements the full `NSMutableDictionary` and KVC
  interfaces, these are not consumed directly by the SDK, and are optional for custom implementations.
  */
-@protocol FBGraphObject<NSObject>
+@protocol FBGraphObject <NSObject>
 
 /*!
  @method
@@ -190,14 +190,14 @@
  `FBGraphObject` protocol, used by the Facebook SDK. Application code should not use the `FBGraphObject` class to
  access instances and instance members, favoring the protocol.
  */
-@interface FBGraphObject : NSMutableDictionary<FBGraphObject>
+@interface FBGraphObject : NSMutableDictionary <FBGraphObject>
 
 /*!
  @method
  @abstract
  Used to create a graph object, usually for use in posting a new graph object or action.
  */
-+ (NSMutableDictionary<FBGraphObject> *)graphObject;
++ (NSMutableDictionary <FBGraphObject> *)graphObject;
 
 /*!
  @method
@@ -218,8 +218,7 @@
 
  @param jsonDictionary              the dictionary representing the underlying object to wrap
  */
-+ (NSMutableDictionary<FBGraphObject> *)graphObjectWrappingDictionary:(NSDictionary *)jsonDictionary;
-
++ (NSMutableDictionary <FBGraphObject> *)graphObjectWrappingDictionary:(NSDictionary *)jsonDictionary;
 
 
 
@@ -235,7 +234,7 @@
 
  @param anotherObject     the `FBGraphObject` to compare it against
  */
-+ (BOOL)isGraphObjectID:(id<FBGraphObject>)anObject sameAs:(id<FBGraphObject>)anotherObject;
++ (BOOL)isGraphObjectID:(id <FBGraphObject> )anObject sameAs:(id <FBGraphObject> )anotherObject;
 
 
 @end

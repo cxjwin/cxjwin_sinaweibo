@@ -35,7 +35,7 @@ const NSString *class_key = @"class";
 
 @property (copy, nonatomic) NSString *location;
 
-@property (copy, nonatomic) NSString * description;
+@property (copy, nonatomic) NSString *description;
 
 @property (copy, nonatomic) NSString *url;
 
@@ -67,7 +67,7 @@ const NSString *class_key = @"class";
 
 @property (strong, nonatomic) NSNumber *verified_type;
 
-@property (strong, nonatomic) id<WBGraphStatus> status;
+@property (strong, nonatomic) id <WBGraphStatus> status;
 
 @property (strong, nonatomic) NSNumber *ptype;
 

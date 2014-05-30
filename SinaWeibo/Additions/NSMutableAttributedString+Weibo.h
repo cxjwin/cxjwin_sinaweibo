@@ -17,18 +17,30 @@ extern NSString *const kCustomGlyphAttributeImageName;
 extern NSString *const kCustomGlyphAttributeInfo;
 
 typedef enum CustomGlyphAttributeType {
-    CustomGlyphAttributeURL = 0,
-    CustomGlyphAttributeAt,
-    CustomGlyphAttributeTopic,
-    CustomGlyphAttributeImage,
+    CustomGlyphAttributeURL = 0,// URL
+    CustomGlyphAttributeAt,// @
+    CustomGlyphAttributeTopic,// ##
+    CustomGlyphAttributeImage,// image
     CustomGlyphAttributeInfoImage,// 预留，给带相应信息的图片（如点击图片获取相关属性）
 } CustomGlyphAttributeType;
 
-typedef struct CustomGlyphMetrics {
-    CGFloat ascent;
-    CGFloat descent;
-    CGFloat width;
-} CustomGlyphMetrics, *CustomGlyphMetricsRef;
+//typedef struct CustomGlyphMetrics {
+//    CGFloat ascent;
+//    CGFloat descent;
+//    CGFloat width;
+//} CustomGlyphMetrics, *CustomGlyphMetricsRef;
+
+@interface CustomGlyphMetrics : NSObject
+
+@property (nonatomic, assign) CGFloat ascent;
+
+@property (nonatomic, assign) CGFloat descent;
+
+@property (nonatomic, assign) CGFloat width;
+
+- (instancetype)initWithAscent:(CGFloat)ascent descent:(CGFloat)descent width:(CGFloat)width;
+
+@end
 
 @interface NSMutableAttributedString (Weibo)
 

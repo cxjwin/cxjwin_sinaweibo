@@ -34,11 +34,11 @@
 
 @property (strong, nonatomic) NSArray *pic_urls;
 
-@property (strong, nonatomic) id<WBGraphGeo> geo;
+@property (strong, nonatomic) id <WBGraphGeo> geo;
 
-@property (strong, nonatomic) id<WBGraphUser> user;
+@property (strong, nonatomic) id <WBGraphUser> user;
 
-@property (strong, nonatomic) id<WBGraphStatus> retweeted_status;
+@property (strong, nonatomic) id <WBGraphStatus> retweeted_status;
 
 @property (strong, nonatomic) NSNumber *reposts_count;
 
@@ -46,7 +46,7 @@
 
 @property (strong, nonatomic) NSNumber *attitudes_count;
 
-@property (strong, nonatomic) id<WBGraphVisible> visible;
+@property (strong, nonatomic) id <WBGraphVisible> visible;
 
 @end
 
@@ -63,5 +63,3 @@
 @property (strong, nonatomic) NSMutableArray *statuses;
 
 @end
-
-

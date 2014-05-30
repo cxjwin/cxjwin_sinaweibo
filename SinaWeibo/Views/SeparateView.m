@@ -8,50 +8,46 @@
 
 #import "SeparateView.h"
 
-@implementation SeparateView
+@implementation SeparateView {
+	CGFloat lineWidth;
+	UIView *leftLine;
+	UIView *rightLine;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        self.backgroundColor = [UIColor clearColor];
+		[self initCommon];
     }
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
+        [self initCommon];
     }
     return self;
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetStrokeColorWithColor(context, [UIColor greenColor].CGColor);
-    CGContextSetLineWidth(context, 0.5);
-    
-    CGFloat lineY = CGRectGetHeight(rect) * 0.5 + 0.25;
-    CGContextMoveToPoint(context, 0, lineY);
-    CGContextAddLineToPoint(context, CGRectGetWidth(rect) * 0.5 - 15, lineY);
+- (void)initCommon {
+	self.backgroundColor = [UIColor clearColor];
+	self.textAlignment = NSTextAlignmentCenter;
+	self.text = @"原文";
+	
+	lineWidth = 1.0 / [UIScreen mainScreen].scale;
+	
+	leftLine = [[UIView alloc] initWithFrame:CGRectZero];
+	rightLine = [[UIView alloc] initWithFrame:CGRectZero];
+}
 
-    CGContextMoveToPoint(context, CGRectGetWidth(rect) * 0.5 + 15, lineY);
-    CGContextAddLineToPoint(context, CGRectGetWidth(rect), lineY);
-    
-    CGContextStrokePath(context);
-    
-    NSString *string = @"原文";
-    [string drawAtPoint:CGPointMake(CGRectGetWidth(rect) * 0.5 - 12, 0)
-         withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12],
-                          NSForegroundColorAttributeName : [UIColor grayColor]}];
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	
+	leftLine.frame = CGRectMake(5, CGRectGetHeight(self.bounds) * 0.5, CGRectGetWidth(self.bounds) - 10, lineWidth);
+	rightLine.frame =
+	CGRectMake(CGRectGetWidth(self.bounds) + 5, CGRectGetHeight(self.bounds) * 0.5, CGRectGetWidth(self.bounds) - 10, lineWidth);
 }
 
 @end

@@ -13,7 +13,7 @@
 #import "WBGraphGeo.h"
 
 NSString *const path1 = @"/Users/cxjwin/Desktop/WorkSpace/Github/cxjwin_sinaweibo/SinaWeiboTests/Tests/ModelsTests/test_one_status.txt";
-NSString *const path2 = @"/Users/cxjwin/Desktop/WorkSpace/Github/cxjwin_sinaweibo/SinaWeiboTests/Tests/ModelsTests/test_twenty_status.txt";
+NSString *const path2 = @"/Users/cxjwin/Desktop/WorkSpace/Github/cxjwin_sinaweibo/SinaWeiboTests/Tests/ModelsTests/test_twenty_status.json";
 NSString *const path3 = @"/Users/cxjwin/Desktop/WorkSpace/Github/cxjwin_sinaweibo/SinaWeiboTests/Tests/ModelsTests/test_user.txt";
 
 @interface WBGraphObjectTests : XCTestCase
@@ -38,9 +38,7 @@ NSString *const path3 = @"/Users/cxjwin/Desktop/WorkSpace/Github/cxjwin_sinaweib
 		NSData *data = [NSData dataWithContentsOfFile:path1];
 		NSError *error = nil;
 		self.statusDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-		if (!self.statusDict) {
-			NSLog(@"%@", [error debugDescription]);
-		}
+		XCTAssertNotNil(self.statusDict, @"%@", [error debugDescription]);
 	}
 	
 	// statuses data
@@ -48,9 +46,7 @@ NSString *const path3 = @"/Users/cxjwin/Desktop/WorkSpace/Github/cxjwin_sinaweib
 		NSData *data = [NSData dataWithContentsOfFile:path2];
 		NSError *error = nil;
 		self.statusesDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-		if (!self.statusesDict) {
-			NSLog(@"%@", [error debugDescription]);
-		}
+		XCTAssertNotNil(self.statusDict, @"%@", [error debugDescription]);
 	}
 	
 	// user data
@@ -58,9 +54,7 @@ NSString *const path3 = @"/Users/cxjwin/Desktop/WorkSpace/Github/cxjwin_sinaweib
 		NSData *data = [NSData dataWithContentsOfFile:path3];
 		NSError *error = nil;
 		self.userDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-		if (!self.userDict) {
-			NSLog(@"%@", [error debugDescription]);
-		}
+		XCTAssertNotNil(self.statusDict, @"%@", [error debugDescription]);
 	}
 }
 

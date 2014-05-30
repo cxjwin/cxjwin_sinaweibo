@@ -23,23 +23,38 @@ const CGFloat kAscentDescentScale = 0.25;
 
 /* Callbacks */
 static void deallocCallback(void *refCon) {
-	free(refCon), refCon = NULL;
+	CFRelease(refCon);
 }
 
 static CGFloat ascentCallback(void *refCon) {
-	CustomGlyphMetricsRef metrics = (CustomGlyphMetricsRef)refCon;
-	return metrics->ascent;
+	CustomGlyphMetrics *metrics = (__bridge CustomGlyphMetrics *)refCon;
+	return metrics.ascent;
 }
 
 static CGFloat descentCallback(void *refCon) {
-	CustomGlyphMetricsRef metrics = (CustomGlyphMetricsRef)refCon;
-	return metrics->descent;
+	CustomGlyphMetrics *metrics = (__bridge CustomGlyphMetrics *)refCon;
+	return metrics.descent;
 }
 
 static CGFloat widthCallback(void *refCon) {
-	CustomGlyphMetricsRef metrics = (CustomGlyphMetricsRef)refCon;
-	return metrics->width;
+	CustomGlyphMetrics *metrics = (__bridge CustomGlyphMetrics *)refCon;
+	return metrics.width;
 }
+
+@implementation CustomGlyphMetrics
+
+- (instancetype)initWithAscent:(CGFloat)ascent descent:(CGFloat)descent width:(CGFloat)width {
+	self = [super init];
+	if (self) {
+		_ascent = ascent;
+		_descent = descent;
+		_width = width;
+	}
+	return self;
+}
+
+@end
+
 
 @implementation NSMutableAttributedString (Weibo)
 
@@ -90,11 +105,8 @@ static CGFloat widthCallback(void *refCon) {
 			callbacks.dealloc = deallocCallback;
             
 			// 这里设置下需要绘制的图片的大小，这里我自定义了一个结构体以便于存储数据
-			CustomGlyphMetricsRef metrics = malloc(sizeof(CustomGlyphMetrics));
-			metrics->ascent = 12;
-			metrics->descent = 12 * kAscentDescentScale;
-			metrics->width = 16;
-			CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, metrics);
+			CustomGlyphMetrics *metrics = [[CustomGlyphMetrics alloc] initWithAscent:12 descent:(12 * kAscentDescentScale) width:16];
+			CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge_retained void *)metrics);
 			[newStr addAttribute:(NSString *)kCTRunDelegateAttributeName
 			               value:(__bridge id)delegate
 			               range:__range];

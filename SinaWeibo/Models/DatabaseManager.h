@@ -10,7 +10,6 @@
 #import <FMDB/FMDatabase.h>
 
 @interface DatabaseManager : NSObject
-
 @property (strong, nonatomic) FMDatabase *database;
 @property (readonly, nonatomic) NSString *databaseName;
 @property (readonly, nonatomic) NSArray *tableNames;

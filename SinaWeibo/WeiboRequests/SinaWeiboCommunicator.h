@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 #if __LP64__ || (TARGET_OS_EMBEDDED && !TARGET_OS_IPHONE) || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
-    #define kOneKilobyte 1024lu
-    #define kOneMegabyte 1048576lu
+    #define kOneKiloByte 1024lu
+    #define kOneMegaByte 1048576lu
     #define kOneGigaByte 1073741824lu
 #else
-    #define kOneKilobyte 1024u
-    #define kOneMegabyte 1048576u
+    #define kOneKiloByte 1024u
+    #define kOneMegaByte 1048576u
     #define kOneGigaByte 1073741824u
 #endif
 

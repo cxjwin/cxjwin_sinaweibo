@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5514878918FF7619003D12D6 /* WBGraphStatus.h in Sources */ = {isa = PBXBuildFile; fileRef = 5514877A18FF6F6E003D12D6 /* WBGraphStatus.h */; };
-		5514878B18FF7619003D12D6 /* WBGraphUser.h in Sources */ = {isa = PBXBuildFile; fileRef = 5514877F18FF71F6003D12D6 /* WBGraphUser.h */; };
-		5514878D18FF7619003D12D6 /* WBGraphGeo.h in Sources */ = {isa = PBXBuildFile; fileRef = 5514878218FF7447003D12D6 /* WBGraphGeo.h */; };
-		5514879218FF774E003D12D6 /* WBGraphObjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5514878518FF75E4003D12D6 /* WBGraphObjectTests.m */; };
 		5514889618FFCC4A003D12D6 /* FBGraphObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5514889518FFCC4A003D12D6 /* FBGraphObject.m */; };
-		5514889718FFCC68003D12D6 /* FBGraphObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 5514889418FFCC4A003D12D6 /* FBGraphObject.h */; };
-		5514889818FFCC68003D12D6 /* FBGraphObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5514889518FFCC4A003D12D6 /* FBGraphObject.m */; };
 		551AE53617C1F92300A9719C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9F9C517C1C1AA0075C950 /* AppDelegate.m */; };
 		551DF9A017E6974A00FC482F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551DF99F17E6974A00FC482F /* QuartzCore.framework */; };
+		5543C9E919331AB000A45D3E /* SinaWeiboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 551AE52A17C1DBFC00A9719C /* SinaWeiboTests.m */; };
+		5543C9EA19331AB000A45D3E /* WBGraphObjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5514878518FF75E4003D12D6 /* WBGraphObjectTests.m */; };
+		5543C9EB19331AB000A45D3E /* RequestUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55986A4A17C33FAE00D9343A /* RequestUtilsTests.m */; };
+		5543C9EC19331AB000A45D3E /* AppDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9F9EA17C1C3260075C950 /* AppDelegateTests.m */; };
+		5543C9F2193320FE00A45D3E /* AsyncXCTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5543C9F1193320FE00A45D3E /* AsyncXCTestCase.m */; };
+		5543C9F41933444A00A45D3E /* LoginViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5543C9F31933444A00A45D3E /* LoginViewControllerTests.m */; };
 		555DC61C18FD7AD500EAD474 /* CoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DC61B18FD7AD500EAD474 /* CoreTextView.m */; };
 		555DC62618FD7B1D00EAD474 /* NSMutableAttributedString+Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DC62518FD7B1D00EAD474 /* NSMutableAttributedString+Weibo.m */; };
 		55630C3517E6F05800B980BB /* emotionImage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55630C3317E6F05800B980BB /* emotionImage.plist */; };
@@ -144,7 +144,7 @@
 		55C523EC17CF20D6006686DF /* test_user.txt in Resources */ = {isa = PBXBuildFile; fileRef = 55C523EB17CF20D6006686DF /* test_user.txt */; };
 		55CC5EE117CB502900B2E194 /* test_empty.txt in Resources */ = {isa = PBXBuildFile; fileRef = 55CC5EDE17CB502900B2E194 /* test_empty.txt */; };
 		55CC5EE217CB502900B2E194 /* test_one_status.txt in Resources */ = {isa = PBXBuildFile; fileRef = 55CC5EDF17CB502900B2E194 /* test_one_status.txt */; };
-		55CC5EE317CB502900B2E194 /* test_twenty_status.txt in Resources */ = {isa = PBXBuildFile; fileRef = 55CC5EE017CB502900B2E194 /* test_twenty_status.txt */; };
+		55CC5EE317CB502900B2E194 /* test_twenty_status.json in Resources */ = {isa = PBXBuildFile; fileRef = 55CC5EE017CB502900B2E194 /* test_twenty_status.json */; };
 		55CC5EEA17CB602100B2E194 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CC5EE917CB602100B2E194 /* CoreData.framework */; };
 		55E3033417F01BDD00C433E1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E3033317F01BDD00C433E1 /* MainStoryboard.storyboard */; };
 		55FC6DCE17F581D2007DDC8A /* SeparateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FC6DC717F581D2007DDC8A /* SeparateView.m */; };
@@ -189,6 +189,9 @@
 		5514889518FFCC4A003D12D6 /* FBGraphObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGraphObject.m; sourceTree = "<group>"; };
 		551AE52A17C1DBFC00A9719C /* SinaWeiboTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SinaWeiboTests.m; path = Tests/SinaWeiboTests.m; sourceTree = "<group>"; };
 		551DF99F17E6974A00FC482F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5543C9F0193320FE00A45D3E /* AsyncXCTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncXCTestCase.h; sourceTree = "<group>"; };
+		5543C9F1193320FE00A45D3E /* AsyncXCTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncXCTestCase.m; sourceTree = "<group>"; };
+		5543C9F31933444A00A45D3E /* LoginViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewControllerTests.m; sourceTree = "<group>"; };
 		555DC61A18FD7AD500EAD474 /* CoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextView.h; sourceTree = "<group>"; };
 		555DC61B18FD7AD500EAD474 /* CoreTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextView.m; sourceTree = "<group>"; };
 		555DC62418FD7B1D00EAD474 /* NSMutableAttributedString+Weibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+Weibo.h"; sourceTree = "<group>"; };
@@ -328,7 +331,7 @@
 		55C523EB17CF20D6006686DF /* test_user.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_user.txt; sourceTree = "<group>"; };
 		55CC5EDE17CB502900B2E194 /* test_empty.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_empty.txt; sourceTree = "<group>"; };
 		55CC5EDF17CB502900B2E194 /* test_one_status.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_one_status.txt; sourceTree = "<group>"; };
-		55CC5EE017CB502900B2E194 /* test_twenty_status.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_twenty_status.txt; sourceTree = "<group>"; };
+		55CC5EE017CB502900B2E194 /* test_twenty_status.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_twenty_status.json; sourceTree = "<group>"; };
 		55CC5EE917CB602100B2E194 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		55E3033317F01BDD00C433E1 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		55FC6DC617F581D2007DDC8A /* SeparateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeparateView.h; sourceTree = "<group>"; };
@@ -525,6 +528,8 @@
 		55986A4517C33F1600D9343A /* SinaWeiboRequestsTests */ = {
 			isa = PBXGroup;
 			children = (
+				5543C9F0193320FE00A45D3E /* AsyncXCTestCase.h */,
+				5543C9F1193320FE00A45D3E /* AsyncXCTestCase.m */,
 				55986A4A17C33FAE00D9343A /* RequestUtilsTests.m */,
 			);
 			name = SinaWeiboRequestsTests;
@@ -710,6 +715,7 @@
 				55CC5EDB17CB4F7D00B2E194 /* ModelsTests */,
 				55986A4517C33F1600D9343A /* SinaWeiboRequestsTests */,
 				55A9F9EA17C1C3260075C950 /* AppDelegateTests.m */,
+				5543C9F31933444A00A45D3E /* LoginViewControllerTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -720,7 +726,7 @@
 				55C523EB17CF20D6006686DF /* test_user.txt */,
 				55CC5EDE17CB502900B2E194 /* test_empty.txt */,
 				55CC5EDF17CB502900B2E194 /* test_one_status.txt */,
-				55CC5EE017CB502900B2E194 /* test_twenty_status.txt */,
+				55CC5EE017CB502900B2E194 /* test_twenty_status.json */,
 				5514878518FF75E4003D12D6 /* WBGraphObjectTests.m */,
 			);
 			path = ModelsTests;
@@ -927,7 +933,7 @@
 			files = (
 				55FC6E0717F5820F007DDC8A /* close.png in Resources */,
 				55CC5EE117CB502900B2E194 /* test_empty.txt in Resources */,
-				55CC5EE317CB502900B2E194 /* test_twenty_status.txt in Resources */,
+				55CC5EE317CB502900B2E194 /* test_twenty_status.json in Resources */,
 				55A9F9D917C1C1AA0075C950 /* InfoPlist.strings in Resources */,
 				55C523EC17CF20D6006686DF /* test_user.txt in Resources */,
 				55CC5EE217CB502900B2E194 /* test_one_status.txt in Resources */,
@@ -1035,12 +1041,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5514889718FFCC68003D12D6 /* FBGraphObject.h in Sources */,
-				5514889818FFCC68003D12D6 /* FBGraphObject.m in Sources */,
-				5514878918FF7619003D12D6 /* WBGraphStatus.h in Sources */,
-				5514878B18FF7619003D12D6 /* WBGraphUser.h in Sources */,
-				5514878D18FF7619003D12D6 /* WBGraphGeo.h in Sources */,
-				5514879218FF774E003D12D6 /* WBGraphObjectTests.m in Sources */,
+				5543C9E919331AB000A45D3E /* SinaWeiboTests.m in Sources */,
+				5543C9EA19331AB000A45D3E /* WBGraphObjectTests.m in Sources */,
+				5543C9EB19331AB000A45D3E /* RequestUtilsTests.m in Sources */,
+				5543C9EC19331AB000A45D3E /* AppDelegateTests.m in Sources */,
+				5543C9F41933444A00A45D3E /* LoginViewControllerTests.m in Sources */,
+				5543C9F2193320FE00A45D3E /* AsyncXCTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
