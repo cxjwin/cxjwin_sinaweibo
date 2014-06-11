@@ -8,7 +8,6 @@
 
 #import "WeiboStatus.h"
 
-
 @implementation WeiboStatus
 
 @end

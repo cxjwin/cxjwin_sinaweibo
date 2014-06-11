@@ -256,9 +256,7 @@ static const int kImageViewBaseTag = 110;
 			});
 
 			NSMutableArray *picURLs = result;
-#ifdef DEBUG
-			assert([picURLs count] > 1);
-#endif
+			NSAssert([picURLs count] > 1, @"pic count > 1");
 			picCount = [picURLs count];
 			for (int i = 0; i < picCount; i++) {
 				NSURL *picURL = [picURLs objectAtIndex:i];

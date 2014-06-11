@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SeparateView : UILabel
+@interface SeparateView : UIView
 
 @end

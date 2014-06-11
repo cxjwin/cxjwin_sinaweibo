@@ -120,7 +120,11 @@ static const char *preview_image_size_key = "preview_image_size_key";
 }
 
 - (NSValue *)previewImageSize {
-	return objc_getAssociatedObject(self, preview_image_size_key);
+	NSValue *value = objc_getAssociatedObject(self, preview_image_size_key);
+	if (!value) {
+		value = [NSValue valueWithCGSize:CGSizeZero];
+	}
+	return value;
 }
 
 - (void)fillInDetailsWithJSONObject:(NSDictionary *)info {

@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "SinaWeiboManager.h"
 #import "DatabaseManager.h"
-#import "LoginViewController.h"
+#import "SinaWeibo-Bridging-Header.h"
 
 @implementation AppDelegate
 
@@ -58,7 +58,7 @@
 
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler
 {
-    NSURLSessionConfiguration *backgroundConfigObject = [NSURLSessionConfiguration backgroundSessionConfiguration:identifier];
+    NSURLSessionConfiguration *backgroundConfigObject = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:identifier];
     
     SinaWeiboCommunicator *communicator = [[SinaWeiboManager defaultManager] communicator];
     /*NSURLSession *backgroundSession = */

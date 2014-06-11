@@ -46,7 +46,7 @@ NSTimeInterval kDefaultTimeoutIntervalForResource = 60;
 		}
 		// backgroundConfigObject
 		{
-			NSURLSessionConfiguration *backgroundConfigObject = [NSURLSessionConfiguration backgroundSessionConfiguration:kWeiboBackgroundSessionIdentifier];
+			NSURLSessionConfiguration *backgroundConfigObject = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:kWeiboBackgroundSessionIdentifier];
 			backgroundConfigObject.timeoutIntervalForResource = kDefaultTimeoutIntervalForResource;
 			self.backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfigObject delegate:self delegateQueue:self.operationQueue];
 		}

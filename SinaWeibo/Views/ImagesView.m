@@ -28,6 +28,4 @@ CGFloat kImgaeWidth = 64.0;
     
 }
 
-
-
 @end

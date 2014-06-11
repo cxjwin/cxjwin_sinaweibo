@@ -10,6 +10,7 @@
 
 @implementation SeparateView {
 	CGFloat lineWidth;
+	UILabel *label;
 	UIView *leftLine;
 	UIView *rightLine;
 }
@@ -32,22 +33,39 @@
 }
 
 - (void)initCommon {
-	self.backgroundColor = [UIColor clearColor];
-	self.textAlignment = NSTextAlignmentCenter;
-	self.text = @"原文";
-	
 	lineWidth = 1.0 / [UIScreen mainScreen].scale;
 	
+	// left line
 	leftLine = [[UIView alloc] initWithFrame:CGRectZero];
+	leftLine.backgroundColor = [UIColor grayColor];
+	[self addSubview:leftLine];
+	
+	// right line
 	rightLine = [[UIView alloc] initWithFrame:CGRectZero];
+	rightLine.backgroundColor = [UIColor grayColor];
+	[self addSubview:rightLine];
+	
+	// label
+	label = [[UILabel alloc] initWithFrame:CGRectZero];
+	label.backgroundColor = [UIColor clearColor];
+	label.textAlignment = NSTextAlignmentCenter;
+	label.font = [UIFont systemFontOfSize:12];
+	label.textColor = [UIColor purpleColor];
+	label.text = @"原文";
+	[self addSubview:label];
 }
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
-	leftLine.frame = CGRectMake(5, CGRectGetHeight(self.bounds) * 0.5, CGRectGetWidth(self.bounds) - 10, lineWidth);
+	CGSize labelSize = [label sizeThatFits:CGSizeMake(60, label.font.lineHeight)];
+	CGRect labelFrame =
+	CGRectMake((CGRectGetWidth(self.bounds) - labelSize.width) * 0.5, (CGRectGetHeight(self.bounds) - labelSize.height) * 0.5, labelSize.width, labelSize.height);
+	label.frame = CGRectIntegral(labelFrame);
+	
+	leftLine.frame = CGRectMake(15, CGRectGetHeight(self.bounds) * 0.5, CGRectGetWidth(self.bounds) * 0.5 - 30, lineWidth);
 	rightLine.frame =
-	CGRectMake(CGRectGetWidth(self.bounds) + 5, CGRectGetHeight(self.bounds) * 0.5, CGRectGetWidth(self.bounds) - 10, lineWidth);
+	CGRectMake(CGRectGetWidth(self.bounds) * 0.5 + 15, CGRectGetHeight(self.bounds) * 0.5, CGRectGetWidth(self.bounds) * 0.5 - 30, lineWidth);
 }
 
 @end

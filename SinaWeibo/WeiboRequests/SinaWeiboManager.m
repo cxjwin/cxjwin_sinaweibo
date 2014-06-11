@@ -105,7 +105,7 @@ static SinaWeiboManager *singleton = nil;
 
 #pragma mark - 
 #pragma mark - loginIn/loginOut
-- (void)loginIn {
+- (void)login {
     if ([self isAuthorizeValid]) {
         [self updateAccountToDB];
         [self getCurrentUserInfo];
@@ -117,7 +117,7 @@ static SinaWeiboManager *singleton = nil;
     }
 }
 
-- (void)loginOut {
+- (void)logout {
     [self removeAuthData];
     [[NSNotificationCenter defaultCenter] postNotificationName:kSinaWeiboDidLogOutNotification object:nil];
 }
