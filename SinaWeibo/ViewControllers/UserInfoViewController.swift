@@ -21,6 +21,7 @@ class UserInfoViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+		self.view.backgroundColor = UIColor.whiteColor()
     }
 
 	override func viewWillAppear(animated: Bool) {
@@ -73,7 +74,6 @@ class UserInfoViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-	
 
     /*
     // #pragma mark - Navigation

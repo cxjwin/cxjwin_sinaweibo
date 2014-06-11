@@ -14,6 +14,8 @@
 NSString *const kViewControllerWillPush = @"kViewControllerWillPush";
 NSString *const kShowOriginalPicNotification = @"kShowOriginalPicNotification";
 NSString *const kThumbnailPicLoadedNotification = @"kThumbnailPicLoadedNotification";
+NSString *const kStatusActionNotification = @"kStatusActionNotification";
+
 
 static const int kImageViewBaseTag = 110;
 

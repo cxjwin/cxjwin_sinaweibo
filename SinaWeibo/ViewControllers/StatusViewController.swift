@@ -75,7 +75,7 @@ class StatusViewController: UITableViewController {
         // Return the number of rows in the section.
         return self.statuses.count
     }
-
+	
     override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath?) -> UITableViewCell? {
 		if !tableView || !indexPath {
 			return nil;
@@ -84,12 +84,24 @@ class StatusViewController: UITableViewController {
 		let identifier: String = "StatusCell"
 		
 		var cell = tableView!.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath!) as UITableViewCell
-		
 		cell.selectionStyle = .None
 		
 		var status = self.statuses[indexPath!.row] as WeiboStatus;
 		
 		var subView = cell.contentView.viewWithTag(kStatusViewTag) as StatusView
+		subView.statusAction = {
+			[weak self] (statusView: StatusView?, info: AnyObject?, actionType: StatusActionType) in
+			
+			switch actionType {
+			case .ShowUserInfo:
+				var viewController = UserInfoViewController(nibName: nil, bundle: nil)
+				viewController.user = status.user
+				self!.navigationController.pushViewController(viewController, animated: true)
+				
+			default:
+				NSLog("Other actionType")
+			}
+		}
 		
 		subView.status = status
 		
