@@ -14,15 +14,16 @@
 extern NSString *const kShowOriginalPicNotification;
 extern NSString *const kThumbnailPicLoadedNotification;
 
-typedef NS_ENUM(NSUInteger, StatusActionType) {
-    ShowUserInfo = 0,
-    LinkToURL,
-    ShowOriginalPic,
-    ThumbnailPicDidLoad,
-    RetweetStatus,
-    CommentStatus,
-    PraiseStatus,
-};
+// Notification object is WeiboStatus
+extern NSString *const kRetweetStatusNotification;
+// Notification object is WeiboStatus
+extern NSString *const kCommentStatusNotification;
+// Notification object is WeiboStatus
+extern NSString *const kPraiseStatusNotification;
+// Notification object is WeiboUser
+extern NSString *const kShowUserInfoNotification;
+// Notification object url String
+extern NSString *const kLinkToURLNotification;
 
 @class WeiboStatus;
 
@@ -56,8 +57,5 @@ typedef NS_ENUM(NSUInteger, StatusActionType) {
 
 // 微博状态
 @property (nonatomic, strong) WeiboStatus *status;
-
-// 操作回调Block
-@property (nonatomic, copy) void (^statusAction)(StatusView *statusView, id info, StatusActionType actionType);
 
 @end
