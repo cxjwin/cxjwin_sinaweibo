@@ -3,7 +3,7 @@
 //  SinaWeibo
 //
 //  Created by cxjwin on 14-6-11.
-//  Copyright (c) 2014年 cxjwin. All rights reserved.
+//  Copyright (c) 2014 cxjwin. All rights reserved.
 //
 
 import UIKit
@@ -38,12 +38,11 @@ class StatusViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        
+		
         self.addObservers()
         
         self.tableView.backgroundColor = UIColor(patternImage: UIImage(named:"BackgroundTile"))
-        
+		
         let tableFooterViewFrame = CGRect(x: 0, y: 0, width: CGRectGetWidth(self.tableView.frame), height: 1)
         self.tableView.tableFooterView = UIView(frame: tableFooterViewFrame)
         self.tableView.tableFooterView.backgroundColor = UIColor.whiteColor()

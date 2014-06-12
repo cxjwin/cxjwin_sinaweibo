@@ -3,7 +3,7 @@
 //  TEST_ATTR_002
 //
 //  Created by cxjwin on 13-7-29.
-//  Copyright (c) 2013年 cxjwin. All rights reserved.
+//  Copyright (c) 2013 cxjwin. All rights reserved.
 //
 
 #import "CoreTextView.h"
@@ -36,6 +36,8 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
 	}
 }
 
+#pragma mark - implementation CoreTextView
+
 @implementation CoreTextView  {
 	UITouchPhase touchPhase;
     
@@ -63,7 +65,7 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
 	if (self.attributedString) {
         
         CTFramesetterRef framesetter =
-	    CTFramesetterCreateWithAttributedString((__bridge CFMutableAttributedStringRef)_attributedString);
+	    CTFramesetterCreateWithAttributedString((__bridge CFMutableAttributedStringRef)self.attributedString);
         CGPathRef path = CGPathCreateWithRect(rect, &CGAffineTransformIdentity);
         CTFrameRef textFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
         
@@ -223,6 +225,7 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
 		_attributedString = attributedString;
 	}
     [self setNeedsDisplay];
+	[self setNeedsUpdateConstraints];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -264,13 +267,30 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    if (!newWindow) {// disappear
+	// disappear
+    if (!newWindow) {
         touchPhase = UITouchPhaseCancelled;
         endPoint = kErrorPoint;
         endIndex = kNoTouchIndex;
         
         [self setNeedsDisplay];
     }
+}
+
+#pragma mark - auto layout
+
+- (CGSize)intrinsicContentSize {
+	if (!self.attributedString || [self.attributedString length] == 0) {
+		return CGSizeZero;
+	}
+	
+	// width == kContentTextWidth
+	NSMutableAttributedString *attributedString = [self.attributedString mutableCopy];
+	CGSize adjustSize = [attributedString adjustSizeWithMaxWidth:kContentTextWidth];
+	if (adjustSize.width < kContentTextWidth) {
+		adjustSize.width = kContentTextWidth;
+	}
+	return adjustSize;
 }
 
 @end

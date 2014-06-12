@@ -3,11 +3,12 @@
 //  TEST_ATTR_002
 //
 //  Created by cxjwin on 13-7-29.
-//  Copyright (c) 2013年 cxjwin. All rights reserved.
+//  Copyright (c) 2013 cxjwin. All rights reserved.
 //
 
-#import <CoreText/CoreText.h>
 #import <UIKit/UIKit.h>
+
+@import CoreText;
 
 NS_INLINE Boolean CFRangesIntersect(CFRange range1, CFRange range2) {
 	CFIndex max_location = MAX(range1.location, range2.location);

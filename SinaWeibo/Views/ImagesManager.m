@@ -2,8 +2,8 @@
 //  ImagesManager.m
 //  SinaWeibo
 //
-//  Created by 蔡 雪钧 on 14-4-13.
-//  Copyright (c) 2014年 cxjwin. All rights reserved.
+//  Created by cxjwin on 14-4-13.
+//  Copyright (c) 2014 cxjwin. All rights reserved.
 //
 
 #import <SDWebImage/SDWebImageManager.h>

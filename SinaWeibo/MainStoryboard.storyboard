@@ -35,6 +35,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StatusCell" id="HdE-c2-nDO">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HdE-c2-nDO" id="CmK-g1-raM">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -129,7 +130,7 @@
         <!--User Info View Controller-->
         <scene sceneID="LA4-3K-0Tc">
             <objects>
-                <viewController storyboardIdentifier="UserInfoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5CO-8x-sY6" customClass="UserInfoViewController" customModule="SinaWeibo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserInfoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5CO-8x-sY6" customClass="UserInfoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dj5-Uf-Kfy"/>
                         <viewControllerLayoutGuide type="bottom" id="8Qt-DQ-cg5"/>

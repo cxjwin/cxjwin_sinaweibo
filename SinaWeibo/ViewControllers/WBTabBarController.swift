@@ -3,7 +3,7 @@
 //  SinaWeibo
 //
 //  Created by cxjwin on 14-6-11.
-//  Copyright (c) 2014年 cxjwin. All rights reserved.
+//  Copyright (c) 2014 cxjwin. All rights reserved.
 //
 
 import UIKit
