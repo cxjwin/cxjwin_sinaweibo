@@ -54,7 +54,7 @@ class StatusViewController: UITableViewController {
         if user.screenName {
             self.title = user.screenName
         } else {
-            self.title = "我"
+            self.title = "ME"
         }
         
         self.loadStatusesDataFromDB()
@@ -102,6 +102,8 @@ class StatusViewController: UITableViewController {
         var bounds = willDisplayCell!.contentView.bounds
         var statusView = willDisplayCell!.contentView.viewWithTag(kStatusViewTag) as StatusView
         statusView.frame = CGRect(x: 0, y: 0, width: CGRectGetWidth(bounds), height: CGRectGetHeight(bounds))
+        
+        statusView.updateConstraintsIfNeeded()
     }
     
     override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat  {
@@ -203,9 +205,10 @@ class StatusViewController: UITableViewController {
         }
         
         dispatch_async(dispatch_get_main_queue(), {
-            self.loadStatusesData()
             self.tableView.reloadData()
             })
+        
+        self.loadStatusesData()
     }
     
     func loadStatusesData() {
@@ -222,7 +225,7 @@ class StatusViewController: UITableViewController {
             
             var statuses: NSMutableArray? = WeiboStatus.statusesWithPreviewImageSizeFromJSONData(data, error: nil)
             
-            if statuses {
+            if statuses && statuses?.count > 0 {
                 self!.dataArray.removeAllObjects()
                 self!.dataArray.addObject(data)
                 self!.nextPage = 2
@@ -301,8 +304,12 @@ class StatusViewController: UITableViewController {
                 (note: NSNotification!) in
                 var user = note.object as WeiboUser;
                 println("\(user.profileImageUrl)")
-                var viewController = UserInfoViewController(weiboUser: user)
+                
+                var storyBoard = UIStoryboard(name: "MainStoryboard", bundle: NSBundle.mainBundle())
+                var viewController = storyBoard.instantiateViewControllerWithIdentifier("UserInfoViewController") as UserInfoViewController
+                viewController.user = user
                 self.navigationController.pushViewController(viewController, animated: true)
+                
                 })
             self.observers.addObject(observer)
         }while(false)

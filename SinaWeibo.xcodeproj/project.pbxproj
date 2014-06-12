@@ -188,6 +188,7 @@
 		5514889518FFCC4A003D12D6 /* FBGraphObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGraphObject.m; sourceTree = "<group>"; };
 		551AE52A17C1DBFC00A9719C /* SinaWeiboTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SinaWeiboTests.m; path = Tests/SinaWeiboTests.m; sourceTree = "<group>"; };
 		551DF99F17E6974A00FC482F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		553C39171949F39800F3678D /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		5543C9F0193320FE00A45D3E /* AsyncXCTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncXCTestCase.h; sourceTree = "<group>"; };
 		5543C9F1193320FE00A45D3E /* AsyncXCTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncXCTestCase.m; sourceTree = "<group>"; };
 		5543C9F31933444A00A45D3E /* LoginViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewControllerTests.m; sourceTree = "<group>"; };
@@ -333,7 +334,6 @@
 		55CC5EE017CB502900B2E194 /* test_twenty_status.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_twenty_status.json; sourceTree = "<group>"; };
 		55CC5EE917CB602100B2E194 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		55D0A3061947EAD700630EE7 /* SinaWeibo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SinaWeibo-Bridging-Header.h"; sourceTree = "<group>"; };
-		55D0A30B1947F36000630EE7 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		55D0A30C1947F3AA00630EE7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		55D6071219485A8600176BE2 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		55E3033317F01BDD00C433E1 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -575,7 +575,7 @@
 				55A9F9C517C1C1AA0075C950 /* AppDelegate.m */,
 				55D0A3061947EAD700630EE7 /* SinaWeibo-Bridging-Header.h */,
 				55E3033317F01BDD00C433E1 /* MainStoryboard.storyboard */,
-				55D0A30B1947F36000630EE7 /* MyPlayground.playground */,
+				553C39171949F39800F3678D /* MyPlayground.playground */,
 				555DC62318FD7B1D00EAD474 /* Additions */,
 				55A9F9E817C1C2EF0075C950 /* Views */,
 				55A9F9E617C1C25C0075C950 /* ViewControllers */,

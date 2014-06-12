@@ -79,18 +79,18 @@ static const int kImageViewBaseTag = 110;
     self.reTextView.delegate = self;
     [self addSubview:self.reTextView];
     
-//    self.imagesView = [[UIView alloc] initWithFrame:CGRectZero];
-//    for (int i = 0; i < 9; i++) {
-//        int column = i % 3;
-//        int row = i / 3;
-//        UIImageView *aImageView = [[UIImageView alloc] initWithFrame:CGRectMake(64 * column, 64 * row, 64, 64)];
-//        aImageView.tag = kImageViewBaseTag + i;
-//        [self.imagesView addSubview:aImageView];
-//    }
+    self.imagesView = [[UIView alloc] initWithFrame:CGRectZero];
+    for (int i = 0; i < 9; i++) {
+        int column = i % 3;
+        int row = i / 3;
+        UIImageView *aImageView = [[UIImageView alloc] initWithFrame:CGRectMake(64 * column, 64 * row, 64, 64)];
+        aImageView.tag = kImageViewBaseTag + i;
+        [self.imagesView addSubview:aImageView];
+    }
 	
-//    UITapGestureRecognizer *tapImages = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImages:)];
-//    [self.imagesView addGestureRecognizer:tapImages];
-//    [self addSubview:self.imagesView];
+    UITapGestureRecognizer *tapImages = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImages:)];
+    [self.imagesView addGestureRecognizer:tapImages];
+    [self addSubview:self.imagesView];
 	
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.imageView.userInteractionEnabled = YES;
@@ -114,145 +114,145 @@ static const int kImageViewBaseTag = 110;
     [self addSubview:self.praiseButton];
 	
 	// auto layout
-	self.avatarView.translatesAutoresizingMaskIntoConstraints = NO;
-	self.nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-	self.sourceLabel.translatesAutoresizingMaskIntoConstraints = NO;
-	self.textView.translatesAutoresizingMaskIntoConstraints = NO;
-	self.separateView.translatesAutoresizingMaskIntoConstraints = NO;
-	self.reTextView.translatesAutoresizingMaskIntoConstraints = NO;
-	self.retweetButton.translatesAutoresizingMaskIntoConstraints = NO;
-	self.commentButton.translatesAutoresizingMaskIntoConstraints = NO;
-	self.praiseButton.translatesAutoresizingMaskIntoConstraints = NO;
-
-	NSDictionary *views = @{@"avatarView" : self.avatarView, @"nameLabel" : self.nameLabel,
-							@"sourceLabel": self.sourceLabel, @"textView" : self.textView,
-							@"separateView" : self.separateView, @"reTextView" : self.reTextView,
-							@"retweetButton" : self.retweetButton,
-							@"commentButton" : self.commentButton, @"praiseButton" : self.praiseButton};
-	
-	// avatarView
-	[self addConstraints:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"|-(==6)-[avatarView(==36)]-(==6)-[nameLabel]-(==6)-|"
-                                             options:0
-                                             metrics:nil
-                                               views:views]];
-	
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==6)-[avatarView(==36)]"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	// nameLabel
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.nameLabel
-								  attribute:NSLayoutAttributeTop
-								  relatedBy:NSLayoutRelationEqual
-									 toItem:self.avatarView
-								  attribute:NSLayoutAttributeTop
-								 multiplier:1
-								   constant:0]];
-	
-	// sourceLabel
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.sourceLabel
-								  attribute:NSLayoutAttributeLeft
-								  relatedBy:NSLayoutRelationEqual
-									 toItem:self.nameLabel
-								  attribute:NSLayoutAttributeLeft
-								 multiplier:1
-								   constant:0]];
-	
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.sourceLabel
-								  attribute:NSLayoutAttributeBottom
-								  relatedBy:NSLayoutRelationEqual
-									 toItem:self.avatarView
-								  attribute:NSLayoutAttributeBottom
-								 multiplier:1
-								   constant:0]];
-	
-	// textView
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.textView
-								  attribute:NSLayoutAttributeCenterX
-								  relatedBy:NSLayoutRelationEqual
-									 toItem:self
-								  attribute:NSLayoutAttributeCenterX
-								 multiplier:1
-								   constant:0]];
-	
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[avatarView]-(==9)-[textView]"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-	// separateView
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"|-(==15)-[separateView]-(==15)-|"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[textView]-(==6)-[separateView(==20)]"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-	// reTextView
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.reTextView
-								  attribute:NSLayoutAttributeCenterX
-								  relatedBy:NSLayoutRelationEqual
-									 toItem:self
-								  attribute:NSLayoutAttributeCenterX
-								 multiplier:1
-								   constant:0]];
-	
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[separateView]-(==9)-[reTextView]"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-//	// imagesView
-//	
+//	self.avatarView.translatesAutoresizingMaskIntoConstraints = NO;
+//	self.nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//	self.sourceLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//	self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+//	self.separateView.translatesAutoresizingMaskIntoConstraints = NO;
+//	self.reTextView.translatesAutoresizingMaskIntoConstraints = NO;
+//	self.retweetButton.translatesAutoresizingMaskIntoConstraints = NO;
+//	self.commentButton.translatesAutoresizingMaskIntoConstraints = NO;
+//	self.praiseButton.translatesAutoresizingMaskIntoConstraints = NO;
 //
-	
-	// buttons
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"|-(<=20)-[retweetButton(<=60)]-(>=20)-[commentButton(<=60)]-(>=20)-[praiseButton(<=60)]-(<=20)-|"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.commentButton
-								  attribute:NSLayoutAttributeCenterX
-								  relatedBy:NSLayoutRelationEqual
-									 toItem:self
-								  attribute:NSLayoutAttributeCenterX
-								 multiplier:1
-								   constant:0]];
-	
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[reTextView]-(==9)-[retweetButton(==30)]"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[reTextView]-(==9)-[commentButton(==30)]"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[reTextView]-(==9)-[praiseButton(==30)]"
-											 options:0
-											 metrics:nil
-											   views:views]];
+//	NSDictionary *views = @{@"avatarView" : self.avatarView, @"nameLabel" : self.nameLabel,
+//							@"sourceLabel": self.sourceLabel, @"textView" : self.textView,
+//							@"separateView" : self.separateView, @"reTextView" : self.reTextView,
+//							@"retweetButton" : self.retweetButton,
+//							@"commentButton" : self.commentButton, @"praiseButton" : self.praiseButton};
+//	
+//	// avatarView
+//	[self addConstraints:
+//     [NSLayoutConstraint constraintsWithVisualFormat:@"|-(==6)-[avatarView(==36)]-(==6)-[nameLabel]-(==6)-|"
+//                                             options:0
+//                                             metrics:nil
+//                                               views:views]];
+//	
+//	[self addConstraints:
+//	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==6)-[avatarView(==36)]"
+//											 options:0
+//											 metrics:nil
+//											   views:views]];
+//	// nameLabel
+//	[self addConstraint:
+//	 [NSLayoutConstraint constraintWithItem:self.nameLabel
+//								  attribute:NSLayoutAttributeTop
+//								  relatedBy:NSLayoutRelationEqual
+//									 toItem:self.avatarView
+//								  attribute:NSLayoutAttributeTop
+//								 multiplier:1
+//								   constant:0]];
+//	
+//	// sourceLabel
+//	[self addConstraint:
+//	 [NSLayoutConstraint constraintWithItem:self.sourceLabel
+//								  attribute:NSLayoutAttributeLeft
+//								  relatedBy:NSLayoutRelationEqual
+//									 toItem:self.nameLabel
+//								  attribute:NSLayoutAttributeLeft
+//								 multiplier:1
+//								   constant:0]];
+//	
+//	[self addConstraint:
+//	 [NSLayoutConstraint constraintWithItem:self.sourceLabel
+//								  attribute:NSLayoutAttributeBottom
+//								  relatedBy:NSLayoutRelationEqual
+//									 toItem:self.avatarView
+//								  attribute:NSLayoutAttributeBottom
+//								 multiplier:1
+//								   constant:0]];
+//	
+//	// textView
+//	[self addConstraint:
+//	 [NSLayoutConstraint constraintWithItem:self.textView
+//								  attribute:NSLayoutAttributeCenterX
+//								  relatedBy:NSLayoutRelationEqual
+//									 toItem:self
+//								  attribute:NSLayoutAttributeCenterX
+//								 multiplier:1
+//								   constant:0]];
+//	
+//	[self addConstraints:
+//	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[avatarView]-(==9)-[textView]"
+//											 options:0
+//											 metrics:nil
+//											   views:views]];
+//	
+//	// separateView
+//	[self addConstraints:
+//	 [NSLayoutConstraint constraintsWithVisualFormat:@"|-(==15)-[separateView]-(==15)-|"
+//											 options:0
+//											 metrics:nil
+//											   views:views]];
+//	
+//	[self addConstraints:
+//	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[textView]-(==6)-[separateView(==20)]"
+//											 options:0
+//											 metrics:nil
+//											   views:views]];
+//	
+//	// reTextView
+//	[self addConstraint:
+//	 [NSLayoutConstraint constraintWithItem:self.reTextView
+//								  attribute:NSLayoutAttributeCenterX
+//								  relatedBy:NSLayoutRelationEqual
+//									 toItem:self
+//								  attribute:NSLayoutAttributeCenterX
+//								 multiplier:1
+//								   constant:0]];
+//	
+//	[self addConstraints:
+//	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[separateView]-(==9)-[reTextView]"
+//											 options:0
+//											 metrics:nil
+//											   views:views]];
+//	
+////	// imagesView
+////	
+////
+//	
+//	// buttons
+//	[self addConstraints:
+//	 [NSLayoutConstraint constraintsWithVisualFormat:@"|-(<=20)-[retweetButton(<=60)]-(>=20)-[commentButton(<=60)]-(>=20)-[praiseButton(<=60)]-(<=20)-|"
+//											 options:0
+//											 metrics:nil
+//											   views:views]];
+//	
+//	[self addConstraint:
+//	 [NSLayoutConstraint constraintWithItem:self.commentButton
+//								  attribute:NSLayoutAttributeCenterX
+//								  relatedBy:NSLayoutRelationEqual
+//									 toItem:self
+//								  attribute:NSLayoutAttributeCenterX
+//								 multiplier:1
+//								   constant:0]];
+//	
+//	[self addConstraints:
+//	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[reTextView]-(==9)-[retweetButton(==30)]"
+//											 options:0
+//											 metrics:nil
+//											   views:views]];
+//	
+//	[self addConstraints:
+//	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[reTextView]-(==9)-[commentButton(==30)]"
+//											 options:0
+//											 metrics:nil
+//											   views:views]];
+//	
+//	[self addConstraints:
+//	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[reTextView]-(==9)-[praiseButton(==30)]"
+//											 options:0
+//											 metrics:nil
+//											   views:views]];
 }
 
 // 转发
@@ -288,49 +288,49 @@ static const int kImageViewBaseTag = 110;
 - (void)layoutSubviews {
     [super layoutSubviews];
 	
-//    // header view
-//    self.avatarView.frame = CGRectMake(6, 6, 36, 36);
-//    self.nameLabel.frame = CGRectMake(48, 7, 150, 15);
-//    self.sourceLabel.frame = CGRectMake(48, 27, 150, 15);
-//    
-//    // stuatus text view
-//    CGFloat top = 48 + 3;
-//    self.textView.frame = CGRectMake(20, top, kContentTextWidth, [self.status.contentTextSize CGSizeValue].height);
-//    [self.textView setNeedsDisplay];
-//    top = top + [self.status.contentTextSize CGSizeValue].height + 2;
-//    
-//    if (self.status.retweetedStatus) {
-//        // separate view
-//        top = top + 2;
-//        self.separateView.frame = CGRectMake(15, top, CGRectGetWidth(self.frame) - 30, 16);
-//        top = top + 16 + 2;
-//        
-//        // retweeted status text view
-//        top = top + 3;
-//        self.reTextView.frame = CGRectMake(20, top, kContentTextWidth, [self.status.retweetedStatus.contentTextSize CGSizeValue].height);
-//        top = top + [self.status.retweetedStatus.contentTextSize CGSizeValue].height + 3;
-//    }
-//    
-//    // pic view
-//    if (picCount > 1) {
-//        top = top + 3;
-//        CGSize size = [self.status.previewImageSize CGSizeValue];
-//        CGFloat x = (CGRectGetWidth(self.frame) - size.width) * 0.5;
-//        self.imagesView.frame = CGRectMake(x, top, size.width, size.height);
-//        top = top + size.height + 3;
-//    } else if (picCount == 1) {
-//        top = top + 3;
-//        CGSize size = [self.status.previewImageSize CGSizeValue];
-//        CGFloat x = (CGRectGetWidth(self.frame) - size.width) * 0.5;
-//        self.imageView.frame = CGRectMake(x, top, size.width, size.height);
-//        top = top + size.height + 3;
-//    }
-//    
-//    // tool bar
-//    top = top + 5;
-//    self.retweetButton.frame = CGRectMake(20, top, 40, 16);
-//    self.commentButton.frame = CGRectMake(140, top, 40, 16);
-//    self.praiseButton.frame = CGRectMake(260, top, 40, 16);
+    // header view
+    self.avatarView.frame = CGRectMake(6, 6, 36, 36);
+    self.nameLabel.frame = CGRectMake(48, 7, 150, 15);
+    self.sourceLabel.frame = CGRectMake(48, 27, 150, 15);
+    
+    // stuatus text view
+    CGFloat top = 48 + 3;
+    self.textView.frame = CGRectMake(20, top, kContentTextWidth, [self.status.contentTextSize CGSizeValue].height);
+    [self.textView setNeedsDisplay];
+    top = top + [self.status.contentTextSize CGSizeValue].height + 2;
+    
+    if (self.status.retweetedStatus) {
+        // separate view
+        top = top + 2;
+        self.separateView.frame = CGRectMake(15, top, CGRectGetWidth(self.frame) - 30, 16);
+        top = top + 16 + 2;
+        
+        // retweeted status text view
+        top = top + 3;
+        self.reTextView.frame = CGRectMake(20, top, kContentTextWidth, [self.status.retweetedStatus.contentTextSize CGSizeValue].height);
+        top = top + [self.status.retweetedStatus.contentTextSize CGSizeValue].height + 3;
+    }
+    
+    // pic view
+    if (picCount > 1) {
+        top = top + 3;
+        CGSize size = [self.status.previewImageSize CGSizeValue];
+        CGFloat x = (CGRectGetWidth(self.frame) - size.width) * 0.5;
+        self.imagesView.frame = CGRectMake(x, top, size.width, size.height);
+        top = top + size.height + 3;
+    } else if (picCount == 1) {
+        top = top + 3;
+        CGSize size = [self.status.previewImageSize CGSizeValue];
+        CGFloat x = (CGRectGetWidth(self.frame) - size.width) * 0.5;
+        self.imageView.frame = CGRectMake(x, top, size.width, size.height);
+        top = top + size.height + 3;
+    }
+    
+    // tool bar
+    top = top + 5;
+    self.retweetButton.frame = CGRectMake(20, top, 40, 16);
+    self.commentButton.frame = CGRectMake(140, top, 40, 16);
+    self.praiseButton.frame = CGRectMake(260, top, 40, 16);
 }
 
 - (void)setStatus:(WeiboStatus *)status {
