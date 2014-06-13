@@ -7,5 +7,4 @@
 #import "SinaWeiboCommunicator.h"
 #import "WeiboStatus+Builder.h"
 #import "WeiboUser.h"
-#import "WBWebViewController.h"
 #import "StatusView.h"
