@@ -131,6 +131,7 @@
 		5582239B17F8118100F2856C /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5582239A17F8118100F2856C /* QuickLook.framework */; };
 		5583215C18FA370300790234 /* ImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583215B18FA370300790234 /* ImagesView.m */; };
 		5583215F18FA46CD00790234 /* ImagesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583215E18FA46CD00790234 /* ImagesManager.m */; };
+		5593F91E194AA00500A748B1 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593F91D194AA00500A748B1 /* MyInfoViewController.swift */; };
 		55A9F9B617C1C1AA0075C950 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A9F9B517C1C1AA0075C950 /* Foundation.framework */; };
 		55A9F9B817C1C1AA0075C950 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A9F9B717C1C1AA0075C950 /* CoreGraphics.framework */; };
 		55A9F9BA17C1C1AA0075C950 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A9F9B917C1C1AA0075C950 /* UIKit.framework */; };
@@ -164,7 +165,6 @@
 		55FC6E0C17F5820F007DDC8A /* SinaWeiboCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FC6E0217F5820F007DDC8A /* SinaWeiboCommunicator.m */; };
 		55FC6E0E17F5820F007DDC8A /* SinaWeiboManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FC6E0517F5820F007DDC8A /* SinaWeiboManager.m */; };
 		55FC6E1217F58275007DDC8A /* WeiboStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FC6E1117F58275007DDC8A /* WeiboStatus.m */; };
-		55FC6E1917F58D21007DDC8A /* MyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FC6E1817F58D21007DDC8A /* MyInfoViewController.m */; };
 		936FB0EF78E647609E5E3FF8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E222FD5A4404D1D958BBDB0 /* libPods.a */; };
 		DCF39F8F6C8A4AD3A82AA5AF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E222FD5A4404D1D958BBDB0 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -310,6 +310,7 @@
 		5583215B18FA370300790234 /* ImagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesView.m; sourceTree = "<group>"; };
 		5583215D18FA46CD00790234 /* ImagesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesManager.h; sourceTree = "<group>"; };
 		5583215E18FA46CD00790234 /* ImagesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesManager.m; sourceTree = "<group>"; };
+		5593F91D194AA00500A748B1 /* MyInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		55986A4A17C33FAE00D9343A /* RequestUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestUtilsTests.m; sourceTree = "<group>"; };
 		55A9F9B217C1C1AA0075C950 /* SinaWeibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SinaWeibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A9F9B517C1C1AA0075C950 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -362,8 +363,6 @@
 		55FC6E0517F5820F007DDC8A /* SinaWeiboManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboManager.m; sourceTree = "<group>"; };
 		55FC6E1017F58275007DDC8A /* WeiboStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboStatus.h; sourceTree = "<group>"; };
 		55FC6E1117F58275007DDC8A /* WeiboStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboStatus.m; sourceTree = "<group>"; };
-		55FC6E1717F58D21007DDC8A /* MyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoViewController.h; sourceTree = "<group>"; };
-		55FC6E1817F58D21007DDC8A /* MyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoViewController.m; sourceTree = "<group>"; };
 		5E222FD5A4404D1D958BBDB0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		90C79AD25FD946139EFF5A05 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -652,9 +651,8 @@
 				5572AF38194802330014CEAA /* WBTabBarController.swift */,
 				5572AF3C194804F80014CEAA /* StatusViewController.swift */,
 				55D6071219485A8600176BE2 /* UserInfoViewController.swift */,
+				5593F91D194AA00500A748B1 /* MyInfoViewController.swift */,
 				558054E8194A890000BC232D /* WBWebViewController.swift */,
-				55FC6E1717F58D21007DDC8A /* MyInfoViewController.h */,
-				55FC6E1817F58D21007DDC8A /* MyInfoViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1013,6 +1011,7 @@
 				55FC6E0A17F5820F007DDC8A /* SinaWeiboAuthorizeView.m in Sources */,
 				555DC61C18FD7AD500EAD474 /* CoreTextView.m in Sources */,
 				55FC6E0E17F5820F007DDC8A /* SinaWeiboManager.m in Sources */,
+				5593F91E194AA00500A748B1 /* MyInfoViewController.swift in Sources */,
 				558054E9194A890000BC232D /* WBWebViewController.swift in Sources */,
 				55D6071319485A8600176BE2 /* UserInfoViewController.swift in Sources */,
 				551AE53617C1F92300A9719C /* AppDelegate.m in Sources */,
@@ -1027,7 +1026,6 @@
 				5572AF39194802330014CEAA /* WBTabBarController.swift in Sources */,
 				555DC62618FD7B1D00EAD474 /* NSMutableAttributedString+Weibo.m in Sources */,
 				55A9F9C217C1C1AA0075C950 /* main.m in Sources */,
-				55FC6E1917F58D21007DDC8A /* MyInfoViewController.m in Sources */,
 				55FC6DF417F581F8007DDC8A /* DatabaseManager.m in Sources */,
 				55FC6DCE17F581D2007DDC8A /* SeparateView.m in Sources */,
 			);

@@ -25,8 +25,8 @@ class UserInfoViewController: UIViewController {
         self.view.addSubview(self.imageView)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         if !self.user {
             return

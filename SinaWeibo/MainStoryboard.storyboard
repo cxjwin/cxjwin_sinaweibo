@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A238x" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="zjv-QI-reB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="zjv-QI-reB">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
@@ -7,7 +7,7 @@
         <!--Login View Controller-->
         <scene sceneID="LZh-UL-kBI">
             <objects>
-                <viewController id="zjv-QI-reB" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController id="zjv-QI-reB" customClass="LoginViewController" customModule="SinaWeibo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TDA-3P-OeT"/>
                         <viewControllerLayoutGuide type="bottom" id="yJG-CP-0Ju"/>
@@ -28,7 +28,7 @@
         <!--Status View Controller-->
         <scene sceneID="IVN-Is-8WA">
             <objects>
-                <viewController id="OUw-Hv-QvG" customClass="StatusViewController" sceneMemberID="viewController">
+                <viewController id="OUw-Hv-QvG" customClass="StatusViewController" customModule="SinaWeibo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eb1-9g-CrY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -66,7 +66,7 @@
         <!--Web View Controller-->
         <scene sceneID="tRu-Pc-lwJ">
             <objects>
-                <viewController restorationIdentifier="WBWebViewController" storyboardIdentifier="WBWebViewController" id="Izf-Xg-wnC" customClass="WBWebViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WBWebViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Izf-Xg-wnC" customClass="WBWebViewController" customModule="SinaWeibo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tkN-A4-Pob"/>
                         <viewControllerLayoutGuide type="bottom" id="1OR-rC-dwz"/>
@@ -92,7 +92,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
-                        <outlet property="webView" destination="uDb-uK-a9E" id="gxD-NZ-CZr"/>
+                        <outlet property="webView" destination="uDb-uK-a9E" id="y9P-yV-Rnr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LIn-2s-nZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -118,11 +118,38 @@
         <!--My Info View Controller-->
         <scene sceneID="3uE-zL-wmD">
             <objects>
-                <viewController id="5Lm-cn-UUk" customClass="MyInfoViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="5zp-WX-RAM">
+                <viewController id="5Lm-cn-UUk" customClass="MyInfoViewController" customModule="SinaWeibo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5zp-WX-RAM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="Sux-qo-5yz">
+                            <rect key="frame" x="0.0" y="-38" width="320" height="120"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EH8-hi-e7Y">
+                                    <rect key="frame" x="10" y="10" width="64" height="64"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="64" id="2yA-la-IJV"/>
+                                        <constraint firstAttribute="height" constant="64" id="ebu-Qd-aCy"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="EH8-hi-e7Y" firstAttribute="top" secondItem="Sux-qo-5yz" secondAttribute="top" constant="10" id="AzW-xl-MJB"/>
+                                <constraint firstItem="EH8-hi-e7Y" firstAttribute="leading" secondItem="Sux-qo-5yz" secondAttribute="leading" constant="10" id="pvq-gp-N7c"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="MyStatusCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyStatusCell" id="kqJ-3n-Cwz">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kqJ-3n-Cwz" id="IUO-xh-PgM">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="5Lm-cn-UUk" id="f7J-oK-laB"/>
@@ -191,7 +218,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="iEl-rp-yWr">
             <objects>
-                <tabBarController storyboardIdentifier="WBTabBarController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZxI-L1-Kic" customClass="WBTabBarController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="WBTabBarController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZxI-L1-Kic" customClass="WBTabBarController" customModule="SinaWeibo" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="NE6-rR-SlS">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>

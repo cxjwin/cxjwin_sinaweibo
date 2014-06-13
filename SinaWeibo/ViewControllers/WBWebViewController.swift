@@ -12,10 +12,7 @@ class WBWebViewController: UIViewController {
 
 	@IBOutlet var webView : UIWebView
 	
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        // Custom initialization
-    }
+	var URLString: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +20,19 @@ class WBWebViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		// load request
+		if let URLString = self.URLString {
+			var URL = NSURL(string: URLString)
+			var request = NSURLRequest(URL: URL)
+			self.webView.loadRequest(request)
+		} else {
+			println("url string is nil...")
+		}
+	}
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
