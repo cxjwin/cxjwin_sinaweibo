@@ -225,7 +225,6 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
 		_attributedString = attributedString;
 	}
     [self setNeedsDisplay];
-	[self setNeedsUpdateConstraints];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

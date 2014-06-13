@@ -12,30 +12,27 @@ class UserInfoViewController: UIViewController {
     
     let communicator = SinaWeiboManager.defaultManager().communicator
     
-    var user: WeiboUser
+    var user: WeiboUser?
     
     @IBOutlet var imageView : UIImageView
-    
-    init(weiboUser: WeiboUser) {
-        self.user = weiboUser
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.whiteColor()
+        
+        self.view.addSubview(self.imageView)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        // no user return
-        let curUser = self.user
+        if !self.user {
+            return
+        }
         
+        let curUser = self.user!
         
         var avatarUrl: NSURL?
         
@@ -59,7 +56,7 @@ class UserInfoViewController: UIViewController {
                 if data {
                     var image = UIImage(data: data)
                     println("\(image)")
-                    
+                    self.imageView.image = image
                 }
             } else {
                 self.communicator.downloadImageWithURL(url, downloadCompletionHandler: {
@@ -68,8 +65,7 @@ class UserInfoViewController: UIViewController {
                         NSOperationQueue.mainQueue().addOperationWithBlock{
                             var image = UIImage(data: data)
                             println("\(image)")
-                            // unkown crash
-                            // self!.imageView.image = image
+                            self!.imageView.image = image
                         }
                     }
                     })
