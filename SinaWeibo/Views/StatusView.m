@@ -10,7 +10,9 @@
 #import "StatusView.h"
 #import "WeiboStatus+Builder.h"
 #import "WeiboUser+Builder.h"
+#import "AvatarView.h"
 #import "StatusImageView.h"
+#import "NSMutableAttributedString+Weibo.h"
 
 NSString *const kViewControllerWillPush = @"kViewControllerWillPush";
 NSString *const kShowOriginalPicNotification = @"kShowOriginalPicNotification";
@@ -22,6 +24,7 @@ NSString *const kPraiseStatusNotification = @"kPraiseStatusNotification";
 NSString *const kShowUserInfoNotification = @"kShowUserInfoNotification";
 NSString *const kLinkToURLNotification = @"kLinkToURLNotification";
 
+// ---------------------------------------------------------------------------------------------------------------
 @interface StatusView ()
 
 @end
@@ -30,6 +33,48 @@ NSString *const kLinkToURLNotification = @"kLinkToURLNotification";
 	BOOL didSetupConstraints;
     BOOL hasRetweetedStatus;
 	NSUInteger picCount;
+	
+	NSArray *retweetedContacts;
+}
+
++ (CGFloat)contentHeightWithStatus:(WeiboStatus *)status {
+	CGFloat height = 0;
+	
+	// avatar & name & source
+	height += 9;
+	height += 36;
+	
+	// text
+	height += 9;
+	CGSize adjustSize = [status.attributedText adjustSizeWithMaxWidth:kContentTextWidth];
+	height += adjustSize.height;
+	
+	// retweeted status text
+	WeiboStatus *retweetedStatus = status.retweetedStatus;
+	if (retweetedStatus) {
+		height += 9;
+		// separate view
+		height += 20;
+		
+		// text
+		height += 9;
+		CGSize adjustSize = [retweetedStatus.attributedText adjustSizeWithMaxWidth:kContentTextWidth];
+		height += adjustSize.height;
+	}
+	
+	// image
+	CGSize previewImageSize = [status.previewImageSize CGSizeValue];
+	if (!CGSizeEqualToSize(previewImageSize, CGSizeZero)) {
+		height += 9;
+		height += previewImageSize.height;
+	}
+	
+	// buttons
+	height += 9;
+	height += 30;
+	height += 9;
+
+	return height;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -51,9 +96,9 @@ NSString *const kLinkToURLNotification = @"kLinkToURLNotification";
 }
 
 - (void)initCommon {
-	didSetupConstraints = NO;
+	self.backgroundColor = [UIColor yellowColor];
 	
-    self.avatarView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.avatarView = [[AvatarView alloc] initWithFrame:CGRectZero];
     self.avatarView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapAvatar = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAvatar:)];
     [self.avatarView addGestureRecognizer:tapAvatar];
@@ -97,213 +142,55 @@ NSString *const kLinkToURLNotification = @"kLinkToURLNotification";
     [self.praiseButton setTitle:@"赞" forState:UIControlStateNormal];
     [self.praiseButton addTarget:self action:@selector(praiseStatus) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.praiseButton];
-	
-	// auto layout
-	self.avatarView.translatesAutoresizingMaskIntoConstraints = NO;
-	self.nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-	self.sourceLabel.translatesAutoresizingMaskIntoConstraints = NO;
-	self.textView.translatesAutoresizingMaskIntoConstraints = NO;
-	self.separateView.translatesAutoresizingMaskIntoConstraints = NO;
-	self.reTextView.translatesAutoresizingMaskIntoConstraints = NO;
-	self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
-	self.retweetButton.translatesAutoresizingMaskIntoConstraints = NO;
-	self.commentButton.translatesAutoresizingMaskIntoConstraints = NO;
-	self.praiseButton.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
 	
-//    // header view
-//    self.avatarView.frame = CGRectMake(6, 6, 36, 36);
-//    self.nameLabel.frame = CGRectMake(48, 7, 150, 15);
-//    self.sourceLabel.frame = CGRectMake(48, 27, 150, 15);
-//    
-//    // stuatus text view
-//    CGFloat top = 48 + 3;
-//    self.textView.frame = CGRectMake(20, top, kContentTextWidth, [self.status.contentTextSize CGSizeValue].height);
-//    [self.textView setNeedsDisplay];
-//    top = top + [self.status.contentTextSize CGSizeValue].height + 2;
-//    
-//    if (self.status.retweetedStatus) {
-//        // separate view
-//        top = top + 2;
-//        self.separateView.frame = CGRectMake(15, top, CGRectGetWidth(self.frame) - 30, 16);
-//        top = top + 16 + 2;
-//        
-//        // retweeted status text view
-//        top = top + 3;
-//        self.reTextView.frame = CGRectMake(20, top, kContentTextWidth, [self.status.retweetedStatus.contentTextSize CGSizeValue].height);
-//        top = top + [self.status.retweetedStatus.contentTextSize CGSizeValue].height + 3;
-//    }
-//    
-//    // image view
-//	if (!CGSizeEqualToSize([self.imageView displaySize], CGSizeZero)) {
-//		top = top + 3;
-//		CGSize size = [self.imageView displaySize];
-//		CGFloat x = (CGRectGetWidth(self.frame) - size.width) * 0.5;
-//		self.imageView.frame = CGRectMake(x, top, size.width, size.height);
-//		top = top + size.height + 3;
-//	}
-//	
-//    // tool bar
-//    top = top + 5;
-//    self.retweetButton.frame = CGRectMake(20, top, 40, 16);
-//    self.commentButton.frame = CGRectMake(140, top, 40, 16);
-//    self.praiseButton.frame = CGRectMake(260, top, 40, 16);
+	CGFloat top = 9;
+    // header view
+    self.avatarView.frame = CGRectMake(6, top, 36, 36);
+    self.nameLabel.frame = CGRectMake(48, top, 150, 15);
+    self.sourceLabel.frame = CGRectMake(48, top + 18, 150, 15);
+	top += 36;
+	
+    // stuatus text view
+    top += 9;
+    self.textView.frame = CGRectMake(20, top, kContentTextWidth, [self.status.contentTextSize CGSizeValue].height);
+    [self.textView setNeedsDisplay];
+    top = top + [self.status.contentTextSize CGSizeValue].height + 2;
+    
+    if (self.status.retweetedStatus) {
+        // separate view
+        top += 9;
+        self.separateView.frame = CGRectMake(15, top, CGRectGetWidth(self.frame) - 30, 20);
+        top += 20;
+        
+        // retweeted status text view
+        top += 9;
+        self.reTextView.frame = CGRectMake(20, top, kContentTextWidth, [self.status.retweetedStatus.contentTextSize CGSizeValue].height);
+        top += [self.status.retweetedStatus.contentTextSize CGSizeValue].height;
+    }
+    
+    // image view
+	if (!CGSizeEqualToSize([self.imageView displaySize], CGSizeZero)) {
+		top += 9;
+		CGSize size = [self.imageView displaySize];
+		CGFloat x = (CGRectGetWidth(self.frame) - size.width) * 0.5;
+		self.imageView.frame = CGRectMake(x, top, size.width, size.height);
+		top += size.height;
+	}
+	
+    // tool bar
+    top = top + 9;
+    self.retweetButton.frame = CGRectMake(20, top, 40, 16);
+    self.commentButton.frame = CGRectMake(140, top, 40, 16);
+    self.praiseButton.frame = CGRectMake(260, top, 40, 16);
 }
 
 - (void)updateConstraints {
 	[super updateConstraints];
-	
-	NSDictionary *views = @{@"avatarView" : self.avatarView, @"nameLabel" : self.nameLabel,
-							@"sourceLabel": self.sourceLabel, @"textView" : self.textView,
-							@"separateView" : self.separateView, @"reTextView" : self.reTextView,
-							@"imageView" : self.imageView, @"retweetButton" : self.retweetButton,
-							@"commentButton" : self.commentButton, @"praiseButton" : self.praiseButton};
-	
-	// avatarView
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"|-(==6)-[avatarView(==36)]-(==6)-[nameLabel]-(==6)-|"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==6)-[avatarView(==36)]"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	// nameLabel
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.nameLabel
-								  attribute:NSLayoutAttributeTop
-								  relatedBy:NSLayoutRelationEqual
-									 toItem:self.avatarView
-								  attribute:NSLayoutAttributeTop
-								 multiplier:1
-								   constant:0]];
-	
-	// sourceLabel
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.sourceLabel
-								  attribute:NSLayoutAttributeLeft
-								  relatedBy:NSLayoutRelationEqual
-									 toItem:self.nameLabel
-								  attribute:NSLayoutAttributeLeft
-								 multiplier:1
-								   constant:0]];
-	
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.sourceLabel
-								  attribute:NSLayoutAttributeBottom
-								  relatedBy:NSLayoutRelationEqual
-									 toItem:self.avatarView
-								  attribute:NSLayoutAttributeBottom
-								 multiplier:1
-								   constant:0]];
-	
-	// textView
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.textView
-								  attribute:NSLayoutAttributeCenterX
-								  relatedBy:NSLayoutRelationEqual
-									 toItem:self
-								  attribute:NSLayoutAttributeCenterX
-								 multiplier:1
-								   constant:0]];
-	
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[avatarView]-(==9)-[textView]"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-	
-	if (self.status.retweetedStatus) {
-		// separateView
-		[self addConstraints:
-		 [NSLayoutConstraint constraintsWithVisualFormat:@"|-(==15)-[separateView]-(==15)-|"
-												 options:0
-												 metrics:nil
-												   views:views]];
-		
-		[self addConstraints:
-		 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[textView]-(==6)-[separateView(==20)]"
-												 options:0
-												 metrics:nil
-												   views:views]];
-		
-		// reTextView
-		[self addConstraint:
-		 [NSLayoutConstraint constraintWithItem:self.reTextView
-									  attribute:NSLayoutAttributeCenterX
-									  relatedBy:NSLayoutRelationEqual
-										 toItem:self
-									  attribute:NSLayoutAttributeCenterX
-									 multiplier:1
-									   constant:0]];
-		
-		[self addConstraints:
-		 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[separateView]-(==9)-[reTextView]"
-												 options:0
-												 metrics:nil
-												   views:views]];
-	} else {
-		
-	}
-	
-	
-	// imagesView
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.imageView
-								  attribute:NSLayoutAttributeCenterX
-								  relatedBy:NSLayoutRelationEqual
-									 toItem:self
-								  attribute:NSLayoutAttributeCenterX
-								 multiplier:1
-								   constant:0]];
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[reTextView]-(==9)-[imageView]"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-	// buttons
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"|-(<=20)-[retweetButton(<=60)]-(>=20)-[commentButton(<=60)]-(>=20)-[praiseButton(<=60)]-(<=20)-|"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.commentButton
-								  attribute:NSLayoutAttributeCenterX
-								  relatedBy:NSLayoutRelationEqual
-									 toItem:self
-								  attribute:NSLayoutAttributeCenterX
-								 multiplier:1
-								   constant:0]];
-	
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[imageView]-(==9)-[retweetButton(==30)]"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[imageView]-(==9)-[commentButton(==30)]"
-											 options:0
-											 metrics:nil
-											   views:views]];
-	
-	[self addConstraints:
-	 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[imageView]-(==9)-[praiseButton(==30)]"
-											 options:0
-											 metrics:nil
-											   views:views]];
 }
-
 
 // 转发
 - (void)retweetStatus {
@@ -344,31 +231,9 @@ NSString *const kLinkToURLNotification = @"kLinkToURLNotification";
 }
 
 - (void)refreshViewWithStatus:(WeiboStatus *)status {
-    NSURL *avatarUrl = nil;
-    
+	NSString *profileImageUrl = status.user.profileImageUrl;
     if (status.user.profileImageUrl) {
-        avatarUrl = [NSURL URLWithString:status.user.profileImageUrl];
-    }
-    
-    if (avatarUrl) {
-        SDWebImageManager *manager = [SDWebImageManager sharedManager];
-        UIImage *image = [manager.imageCache imageFromMemoryCacheForKey:[avatarUrl absoluteString]];
-        if (image) {
-            self.avatarView.image = image;
-        } else {
-            self.avatarView.image = nil;
-            
-            __weak typeof(self) weak_self = self;
-            void (^completed)(UIImage *, NSError *, SDImageCacheType, BOOL) = ^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                if (image) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        weak_self.avatarView.image = image;
-                    });
-                }
-            };
-            
-            [manager downloadWithURL:avatarUrl options:SDWebImageCacheMemoryOnly progress:nil completed:completed];
-        }
+		self.avatarView.URLString = profileImageUrl;
     }
     
     self.nameLabel.text = status.user.screenName;
@@ -387,81 +252,7 @@ NSString *const kLinkToURLNotification = @"kLinkToURLNotification";
 	NSArray *strings = [status pictureURLStringsInStatus];
 	self.imageView.URLStrings = strings;
 	
-	/*
-    id result = [status pictureURLInStatus];
-    if (result) {
-        if ([result isKindOfClass:[NSMutableArray class]]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.imageView.hidden = YES;
-                self.imagesView.hidden = NO;
-            });
-            
-            NSMutableArray *picURLs = result;
-            NSAssert([picURLs count] > 1, @"pic count > 1");
-            picCount = [picURLs count];
-            for (int i = 0; i < picCount; i++) {
-                NSURL *picURL = [picURLs objectAtIndex:i];
-                SDWebImageManager *manager = [SDWebImageManager sharedManager];
-                UIImage *image = [manager.imageCache imageFromMemoryCacheForKey:[picURL absoluteString]];
-                if (image) {
-                    UIImageView *aImageView = (id)[self.imagesView viewWithTag : (kImageViewBaseTag + i)];
-                    aImageView.image = image;
-                } else {
-                    __weak typeof(self) weak_self = self;
-                    
-                    __block int block_i = i;
-                    [manager downloadWithURL:picURL
-                                     options:SDWebImageCacheMemoryOnly
-                                    progress:nil
-                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                                       if (image) {
-                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                               UIImageView *aImageView = (id)[weak_self.imagesView viewWithTag: (kImageViewBaseTag + block_i)];
-                                               aImageView.image = image;
-                                           });
-                                       }
-                                   }];
-                }
-            }
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.imageView.hidden = NO;
-                self.imagesView.hidden = YES;
-            });
-            
-            
-            picCount = 1;
-            NSURL *picURL = result;
-            SDWebImageManager *manager = [SDWebImageManager sharedManager];
-            UIImage *image = [manager.imageCache imageFromMemoryCacheForKey:[picURL absoluteString]];
-            if (image) {
-                self.imageView.image = image;
-            } else {
-                self.imageView.image = nil;
-                __weak typeof(self) weak_self = self;
-                
-                [manager downloadWithURL:picURL
-                                 options:SDWebImageCacheMemoryOnly
-                                progress:nil
-                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                                   if (image) {
-                                       // do something with image
-                                       [[NSNotificationCenter defaultCenter] postNotificationName:kThumbnailPicLoadedNotification object:nil];
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           weak_self.imageView.image = image;
-                                           [weak_self setNeedsLayout];
-                                       });
-                                   }
-                               }];
-            }
-        }
-    } else {
-        self.imageView.hidden = YES;
-        self.imagesView.hidden = YES;
-    }
-    */
-	
-    [self setNeedsLayout];
+	[self setNeedsLayout];
 }
 
 #pragma mark -

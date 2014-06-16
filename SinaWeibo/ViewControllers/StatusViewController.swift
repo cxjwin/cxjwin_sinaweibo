@@ -87,55 +87,18 @@ class StatusViewController: UITableViewController {
         
         var status = self.statuses[indexPath.row] as WeiboStatus
         
-        var subView = cell.contentView.viewWithTag(kStatusViewTag) as StatusView
-        
-        subView.status = status
+        var statusView = cell.contentView.viewWithTag(kStatusViewTag) as StatusView
 		
-		subView.setNeedsUpdateConstraints()
-		subView.updateConstraintsIfNeeded()
+        statusView.status = status
         
         return cell
     }
-    
-    override func tableView(tableView: UITableView!, willDisplayCell: UITableViewCell!, forRowAtIndexPath: NSIndexPath!) {
-        var bounds = willDisplayCell.contentView.bounds
-        var statusView = willDisplayCell.contentView.viewWithTag(kStatusViewTag) as StatusView
-        statusView.frame = CGRect(x: 0, y: 0, width: CGRectGetWidth(bounds), height: CGRectGetHeight(bounds))
-		
-		statusView.setNeedsUpdateConstraints()
-		statusView.updateConstraintsIfNeeded()
-    }
 	
     override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat  {
-        
-        var height: CGFloat = 48.0
-        
-        // height for status text
-        var status = self.statuses[indexPath!.row] as WeiboStatus
-        
-        // status text
-        let textHeight = status.contentTextSize.CGSizeValue().height
-        height = 3 + height + textHeight + 3
-        
-        if (status.retweetedStatus) {
-            // height for separtion view
-            height = 2 + height + 16 + 2
-            // height for retweeted status text
-            let reTextHeight = status.retweetedStatus.contentTextSize.CGSizeValue().height
-            height = 3 + height + reTextHeight  + 3
-        }
-		
-		let previewImageSize = status.previewImageSize.CGSizeValue();
-		if !CGSizeEqualToSize(previewImageSize, CGSizeZero) {
-			height = 9 + height + previewImageSize.height + 9
-		}
-		
-        // height for tool bar
-        height = 5 + height + 16 + 10
-        
-        return height
+		var status = self.statuses[indexPath!.row] as WeiboStatus
+		return StatusView.contentHeightWithStatus(status);
     }
-    
+	
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView?, canEditRowAtIndexPath indexPath: NSIndexPath?) -> Bool {

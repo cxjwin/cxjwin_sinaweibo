@@ -97,10 +97,6 @@ const NSUInteger kMaxColumnCount = 3;
 	}
 }
 
-- (CGSize)intrinsicContentSize {
-	return displaySize;
-}
-
 - (CGSize)displaySize {
 	return displaySize;
 }

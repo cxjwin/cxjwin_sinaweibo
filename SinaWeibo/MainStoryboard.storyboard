@@ -41,11 +41,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view tag="101" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EEH-qR-vgx" customClass="StatusView">
+                                        <view tag="101" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EEH-qR-vgx" customClass="StatusView">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="EEH-qR-vgx" firstAttribute="leading" secondItem="CmK-g1-raM" secondAttribute="leading" id="2bW-L5-TtS"/>
+                                        <constraint firstAttribute="bottom" secondItem="EEH-qR-vgx" secondAttribute="bottom" id="7Vv-T5-qfZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="EEH-qR-vgx" secondAttribute="trailing" id="NLZ-E6-unm"/>
+                                        <constraint firstItem="EEH-qR-vgx" firstAttribute="top" secondItem="CmK-g1-raM" secondAttribute="top" id="cVq-Cy-1M6"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>

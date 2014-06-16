@@ -26,12 +26,13 @@ extern NSString *const kShowUserInfoNotification;
 extern NSString *const kLinkToURLNotification;
 
 @class WeiboStatus;
+@class AvatarView;
 @class StatusImageView;
 
 @interface StatusView : UIView <CoreTextViewDelegate>
 
 // 头像
-@property (nonatomic, strong) UIImageView *avatarView;
+@property (nonatomic, strong) AvatarView *avatarView;
 // 昵称
 @property (nonatomic, strong) UILabel *nameLabel;
 // 来源平台
@@ -56,5 +57,7 @@ extern NSString *const kLinkToURLNotification;
 
 // 微博状态
 @property (nonatomic, strong) WeiboStatus *status;
+
++ (CGFloat)contentHeightWithStatus:(WeiboStatus *)status;
 
 @end

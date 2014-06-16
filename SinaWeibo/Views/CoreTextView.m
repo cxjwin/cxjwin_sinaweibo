@@ -68,11 +68,15 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
         CTFramesetterRef framesetter =
 	    CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attributedString);
         CGPathRef path = CGPathCreateWithRect(rect, &CGAffineTransformIdentity);
+		
         CTFrameRef textFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
-        
+		CFRelease(framesetter);
+		CGPathRelease(path);
+		
+		// draw
         CGContextRef context = UIGraphicsGetCurrentContext();
 
-        CGAffineTransform flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, rect.size.height);
+        CGAffineTransform flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, CGRectGetHeight(rect));
         CGContextConcatCTM(context, flipVertical);
         CGContextSetTextDrawingMode(context, kCGTextFill);
 
@@ -94,8 +98,13 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
                 
                 CGFloat width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, &leading);
                 CGFloat height = ascent + descent;
-                
-                CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringIndicesPtr(run)[0], NULL);
+				
+				const CFIndex *indexs = CTRunGetStringIndicesPtr(run);
+				if (!indexs) {
+					continue;
+				}
+				
+                CGFloat xOffset = CTLineGetOffsetForStringIndex(line, indexs[0], NULL);
                 CGFloat x = origins[i].x + xOffset;
                 CGFloat y = origins[i].y - descent;
                 
@@ -136,8 +145,13 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
                     // 不管是绘制链接还是表情，我们都需要知道绘制区域的大小，所以我们需要计算下
                     CGFloat width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), NULL, NULL, NULL);
                     CGFloat height = lineAscent + lineDescent;
-                    
-                    CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringIndicesPtr(run)[0], NULL);
+					
+					const CFIndex *indexs = CTRunGetStringIndicesPtr(run);
+					if (!indexs) {
+						continue;
+					}
+					
+                    CGFloat xOffset = CTLineGetOffsetForStringIndex(line, indexs[0], NULL);
                     CGFloat x = origins[i].x + xOffset;
                     CGFloat y = origins[i].y - lineDescent;
                     
@@ -215,8 +229,7 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
             }
         }
         
-        CFRelease(framesetter);
-        CGPathRelease(path);
+		
         CFRelease(textFrame);
 	}
 }
@@ -275,21 +288,6 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
         
         [self setNeedsDisplay];
     }
-}
-
-#pragma mark - auto layout
-
-- (CGSize)intrinsicContentSize {
-	if (!self.attributedString || [self.attributedString length] == 0) {
-		return CGSizeZero;
-	}
-	
-	// width == kContentTextWidth
-	CGSize adjustSize = [self.attributedString adjustSizeWithMaxWidth:kContentTextWidth];
-	if (adjustSize.width < kContentTextWidth) {
-		adjustSize.width = kContentTextWidth;
-	}
-	return adjustSize;
 }
 
 @end
