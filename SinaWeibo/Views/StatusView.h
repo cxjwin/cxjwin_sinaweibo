@@ -31,6 +31,11 @@ extern NSString *const kLinkToURLNotification;
 
 @interface StatusView : UIView <CoreTextViewDelegate>
 
+// model
+// 微博状态
+@property (nonatomic, strong) WeiboStatus *status;
+
+// sub views
 // 头像
 @property (nonatomic, strong) AvatarView *avatarView;
 // 昵称
@@ -52,11 +57,8 @@ extern NSString *const kLinkToURLNotification;
 @property (nonatomic, strong) UIButton *retweetButton;
 // 评论按钮
 @property (nonatomic, strong) UIButton *commentButton;
-// 点赞
+// 点赞按钮
 @property (nonatomic, strong) UIButton *praiseButton;
-
-// 微博状态
-@property (nonatomic, strong) WeiboStatus *status;
 
 + (CGFloat)contentHeightWithStatus:(WeiboStatus *)status;
 

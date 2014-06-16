@@ -25,11 +25,21 @@ class StatusViewController: UITableViewController {
     var dataArray = NSMutableArray()
     
     var item: NSURL?
-    
+	
+	var isLoading: Bool
+	
+	// views
+	var loadMoreView = LoadMoreView(frame: CGRectZero)
+	
     deinit {
         self.removeObservers()
     }
-    
+	
+	init(coder aDecoder: NSCoder!) {
+		isLoading = false
+		super.init(coder: aDecoder)
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +59,9 @@ class StatusViewController: UITableViewController {
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: Selector("refreshControlValueChanged"), forControlEvents: .ValueChanged)
-        
+		
+		loadMoreView.frame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), 30)
+		
         let user = SinaWeiboManager.defaultManager().user
         if user.screenName {
             self.title = user.screenName
@@ -76,6 +88,10 @@ class StatusViewController: UITableViewController {
     override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
+		let count = self.statuses.count
+		
+		
+		
         return self.statuses.count
     }
 	
@@ -178,6 +194,7 @@ class StatusViewController: UITableViewController {
             
             if error {
                 NSLog("%@", error!.localizedDescription)
+				return;
             }
             
             var statuses: NSMutableArray? = WeiboStatus.statusesWithPreviewImageSizeFromJSONData(data, error: nil)
@@ -194,6 +211,10 @@ class StatusViewController: UITableViewController {
             }
             })
     }
+	
+	func loadNextPageStatusesData() {
+		
+	}
     
     func refreshControlValueChanged() {
         if self.refreshControl.refreshing {

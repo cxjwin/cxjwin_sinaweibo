@@ -95,7 +95,7 @@ NSString *const kLinkToURLNotification = @"kLinkToURLNotification";
     return self;
 }
 
-- (void)initCommon {	
+- (void)initCommon {
     self.avatarView = [[AvatarView alloc] initWithFrame:CGRectZero];
     self.avatarView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapAvatar = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAvatar:)];
