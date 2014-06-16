@@ -26,6 +26,7 @@ extern NSString *const kShowUserInfoNotification;
 extern NSString *const kLinkToURLNotification;
 
 @class WeiboStatus;
+@class StatusImageView;
 
 @interface StatusView : UIView <CoreTextViewDelegate>
 
@@ -43,10 +44,8 @@ extern NSString *const kLinkToURLNotification;
 // 转发内容
 @property (nonatomic, strong) CoreTextView *reTextView;
 
-// 单张图片
-@property (nonatomic, strong) UIImageView *imageView;
-// 多张图片
-@property (nonatomic, strong) UIView *imagesView;
+// 图片
+@property (nonatomic, strong) StatusImageView *imageView;
 
 // 转发按钮
 @property (nonatomic, strong) UIButton *retweetButton;

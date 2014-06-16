@@ -63,9 +63,10 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
 
 - (void)drawRect:(CGRect)rect {
 	if (self.attributedString) {
-        
+		NSAttributedString *attributedString = [self.attributedString copy];
+		
         CTFramesetterRef framesetter =
-	    CTFramesetterCreateWithAttributedString((__bridge CFMutableAttributedStringRef)self.attributedString);
+	    CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attributedString);
         CGPathRef path = CGPathCreateWithRect(rect, &CGAffineTransformIdentity);
         CTFrameRef textFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
         
@@ -222,7 +223,7 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
 
 - (void)setAttributedString:(NSMutableAttributedString *)attributedString {
 	if (_attributedString != attributedString) {
-		_attributedString = attributedString;
+		_attributedString = [attributedString mutableCopy];
 	}
     [self setNeedsDisplay];
 }
@@ -284,8 +285,7 @@ static Boolean isTouchRange(CFIndex index, CFRange touch_range, CFRange run_rang
 	}
 	
 	// width == kContentTextWidth
-	NSMutableAttributedString *attributedString = [self.attributedString mutableCopy];
-	CGSize adjustSize = [attributedString adjustSizeWithMaxWidth:kContentTextWidth];
+	CGSize adjustSize = [self.attributedString adjustSizeWithMaxWidth:kContentTextWidth];
 	if (adjustSize.width < kContentTextWidth) {
 		adjustSize.width = kContentTextWidth;
 	}

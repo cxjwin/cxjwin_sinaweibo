@@ -12,6 +12,7 @@
 #import "NSMutableAttributedString+Weibo.h"
 #import "CoreTextView.h"
 
+/*
 static CGSize sizeWithJpgData(NSData *data) {
 	if ([data length] <= 0x58) {
 		return CGSizeZero;
@@ -61,7 +62,9 @@ static CGSize sizeWithJpgData(NSData *data) {
 		}
 	}
 }
+*/
 
+/*
 static CGSize sizeWithGifData(NSData *data) {
 	short w1 = 0, w2 = 0;
 	[data getBytes:&w1 range:NSMakeRange(0, 1)];
@@ -74,6 +77,7 @@ static CGSize sizeWithGifData(NSData *data) {
 	short h = h1 + (h2 << 8);
 	return CGSizeMake(w, h);
 }
+*/
 
 /*
 static CGSize sizeWithPngData(NSData *data)
@@ -199,9 +203,14 @@ static const char *preview_image_size_key = "preview_image_size_key";
 	for (NSDictionary *info in statusesInfos) {
 		WeiboStatus *status = [[WeiboStatus alloc] init];
 		[status fillInDetailsWithJSONObject:info];
+		
+		NSArray *strings = [status pictureURLStringsInStatus];
+		status.previewImageSize = [NSValue valueWithCGSize:[self imageDisplaySizeWithURLStrings:strings]];
+		
 		[array addObject:status];
 	}
 
+	/*
 	NSURLSessionConfiguration *ephemeralConfigObject = [NSURLSessionConfiguration ephemeralSessionConfiguration];
 	ephemeralConfigObject.timeoutIntervalForResource = 10;
 	NSOperationQueue *delegateQueue = [[NSOperationQueue alloc] init];
@@ -243,7 +252,8 @@ static const char *preview_image_size_key = "preview_image_size_key";
 	}
 
 	[delegateQueue waitUntilAllOperationsAreFinished];
-
+	 */
+	
 	return array;
 }
 
@@ -274,6 +284,69 @@ static const char *preview_image_size_key = "preview_image_size_key";
 
 		return picURL;
 	}
+}
+
+- (NSArray *)pictureURLStringsInStatus {
+	WeiboStatus *picStatus = (self.retweetedStatus != nil ? self.retweetedStatus : self);
+	NSUInteger picCount = [picStatus.picUrls count];
+	
+	NSMutableArray *strings = [NSMutableArray array];
+	// multiple pics
+	if (picCount > 1) {
+		for (NSDictionary *dict in picStatus.picUrls) {
+			NSString *str = [dict objectForKey:@"thumbnail_pic"];
+			if (str && ![str isEqual:[NSNull null]]) {
+				[strings addObject:str];
+			}
+		}
+	} else if (picCount == 1) {
+		NSDictionary *dict = [picStatus.picUrls firstObject];
+		NSString *str = [dict objectForKey:@"thumbnail_pic"];
+		if (str && ![str isEqual:[NSNull null]]) {
+			[strings addObject:str];
+		}
+	} else {
+		if (picStatus.thumbnailPic) {
+			[strings addObject:picStatus.thumbnailPic];
+		} else if (picStatus.bmiddlePic) {
+			[strings addObject:picStatus.bmiddlePic];
+		} else if (picStatus.originalPic) {
+			[strings addObject:picStatus.originalPic];
+		}
+	}
+	
+	if ([strings count] > 0) {
+		return [strings copy];
+	} else {
+		return nil;
+	}
+}
+
++ (CGSize)imageDisplaySizeWithURLStrings:(NSArray *)strings {
+	NSUInteger count = [strings count];
+	if (count == 0) {
+		return CGSizeZero;
+	}
+	
+	if (count == 1) {
+		return CGSizeMake(100, 100);
+	}
+	
+	static NSUInteger kMaxRowCount = 3, kMaxColumnCount = 3;
+	static CGFloat singleImageWidth = 64.0;
+	
+	CGFloat x = 0;
+	CGFloat y = 0;
+	
+	for (NSUInteger i = 0; i < count; ++i) {
+		x += singleImageWidth;
+		if (x >= singleImageWidth * kMaxRowCount) {
+			x = 0;
+			y += singleImageWidth;
+		}
+	}
+	
+	return CGSizeMake(singleImageWidth * kMaxRowCount, MIN(y + singleImageWidth, singleImageWidth * kMaxColumnCount));
 }
 
 @end

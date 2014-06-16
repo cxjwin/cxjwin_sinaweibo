@@ -8,7 +8,6 @@
 
 #import "AsyncXCTestCase.h"
 #import <OHHTTPStubs.h>
-#import <AFNetworking.h>
 #import "RequestUtils.h"
 #import "SinaWeiboConstants.h"
 
@@ -103,19 +102,6 @@ static const NSTimeInterval kResponseTime = 0.5;
 	NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"mywebservice.com"]];
 	
     NSDate* startDate = [NSDate date];
-	
-	[[[AFHTTPRequestOperationManager manager] HTTPRequestOperationWithRequest:req success:^(AFHTTPRequestOperation *operation, id responseObject) {
-		
-		XCTAssertNotNil(responseObject, @"responseObject should not nil");
-		
-		NSLog(@"%@", responseObject);
-		
-		XCTAssertEqualWithAccuracy(-[startDate timeIntervalSinceNow], (kRequestTime + kResponseTime), kResponseTimeTolerence, @"time out");
-		
-		[self notifyAsyncOperationDone];
-	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-		
-	}] start];
 	
     [self waitForAsyncOperationWithTimeout:(kRequestTime + kResponseTime + kResponseTimeTolerence)];
 }

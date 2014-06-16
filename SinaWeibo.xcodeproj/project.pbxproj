@@ -129,9 +129,9 @@
 		557E658917D06F380092F8D1 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 557E658517D046C90092F8D1 /* libsqlite3.dylib */; };
 		558054E9194A890000BC232D /* WBWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558054E8194A890000BC232D /* WBWebViewController.swift */; };
 		5582239B17F8118100F2856C /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5582239A17F8118100F2856C /* QuickLook.framework */; };
-		5583215C18FA370300790234 /* ImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583215B18FA370300790234 /* ImagesView.m */; };
-		5583215F18FA46CD00790234 /* ImagesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583215E18FA46CD00790234 /* ImagesManager.m */; };
 		5593F91E194AA00500A748B1 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593F91D194AA00500A748B1 /* MyInfoViewController.swift */; };
+		5593F921194AA45900A748B1 /* StatusImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5593F920194AA45900A748B1 /* StatusImageView.m */; };
+		55A1D64A194AC6F0008E27FF /* AvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A1D649194AC6F0008E27FF /* AvatarView.m */; };
 		55A9F9B617C1C1AA0075C950 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A9F9B517C1C1AA0075C950 /* Foundation.framework */; };
 		55A9F9B817C1C1AA0075C950 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A9F9B717C1C1AA0075C950 /* CoreGraphics.framework */; };
 		55A9F9BA17C1C1AA0075C950 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A9F9B917C1C1AA0075C950 /* UIKit.framework */; };
@@ -306,12 +306,12 @@
 		557E658517D046C90092F8D1 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		558054E8194A890000BC232D /* WBWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WBWebViewController.swift; sourceTree = "<group>"; };
 		5582239A17F8118100F2856C /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
-		5583215A18FA370300790234 /* ImagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesView.h; sourceTree = "<group>"; };
-		5583215B18FA370300790234 /* ImagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesView.m; sourceTree = "<group>"; };
-		5583215D18FA46CD00790234 /* ImagesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesManager.h; sourceTree = "<group>"; };
-		5583215E18FA46CD00790234 /* ImagesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesManager.m; sourceTree = "<group>"; };
 		5593F91D194AA00500A748B1 /* MyInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
+		5593F91F194AA45900A748B1 /* StatusImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusImageView.h; sourceTree = "<group>"; };
+		5593F920194AA45900A748B1 /* StatusImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusImageView.m; sourceTree = "<group>"; };
 		55986A4A17C33FAE00D9343A /* RequestUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestUtilsTests.m; sourceTree = "<group>"; };
+		55A1D648194AC6F0008E27FF /* AvatarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarView.h; sourceTree = "<group>"; };
+		55A1D649194AC6F0008E27FF /* AvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarView.m; sourceTree = "<group>"; };
 		55A9F9B217C1C1AA0075C950 /* SinaWeibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SinaWeibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A9F9B517C1C1AA0075C950 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55A9F9B717C1C1AA0075C950 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -684,10 +684,10 @@
 				55FC6DC717F581D2007DDC8A /* SeparateView.m */,
 				55FC6DCA17F581D2007DDC8A /* StatusView.h */,
 				55FC6DCB17F581D2007DDC8A /* StatusView.m */,
-				5583215A18FA370300790234 /* ImagesView.h */,
-				5583215B18FA370300790234 /* ImagesView.m */,
-				5583215D18FA46CD00790234 /* ImagesManager.h */,
-				5583215E18FA46CD00790234 /* ImagesManager.m */,
+				5593F91F194AA45900A748B1 /* StatusImageView.h */,
+				5593F920194AA45900A748B1 /* StatusImageView.m */,
+				55A1D648194AC6F0008E27FF /* AvatarView.h */,
+				55A1D649194AC6F0008E27FF /* AvatarView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1011,22 +1011,22 @@
 				55FC6E0A17F5820F007DDC8A /* SinaWeiboAuthorizeView.m in Sources */,
 				555DC61C18FD7AD500EAD474 /* CoreTextView.m in Sources */,
 				55FC6E0E17F5820F007DDC8A /* SinaWeiboManager.m in Sources */,
+				55A1D64A194AC6F0008E27FF /* AvatarView.m in Sources */,
 				5593F91E194AA00500A748B1 /* MyInfoViewController.swift in Sources */,
 				558054E9194A890000BC232D /* WBWebViewController.swift in Sources */,
 				55D6071319485A8600176BE2 /* UserInfoViewController.swift in Sources */,
 				551AE53617C1F92300A9719C /* AppDelegate.m in Sources */,
-				5583215F18FA46CD00790234 /* ImagesManager.m in Sources */,
 				5572AF3D194804F80014CEAA /* StatusViewController.swift in Sources */,
 				55FC6DF617F581F8007DDC8A /* WeiboStatus+Builder.m in Sources */,
 				55FC6DF817F581F8007DDC8A /* WeiboUser.m in Sources */,
 				55D0A30D1947F3AA00630EE7 /* LoginViewController.swift in Sources */,
 				55FC6E1217F58275007DDC8A /* WeiboStatus.m in Sources */,
-				5583215C18FA370300790234 /* ImagesView.m in Sources */,
 				55FC6E0817F5820F007DDC8A /* RequestUtils.m in Sources */,
 				5572AF39194802330014CEAA /* WBTabBarController.swift in Sources */,
 				555DC62618FD7B1D00EAD474 /* NSMutableAttributedString+Weibo.m in Sources */,
 				55A9F9C217C1C1AA0075C950 /* main.m in Sources */,
 				55FC6DF417F581F8007DDC8A /* DatabaseManager.m in Sources */,
+				5593F921194AA45900A748B1 /* StatusImageView.m in Sources */,
 				55FC6DCE17F581D2007DDC8A /* SeparateView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

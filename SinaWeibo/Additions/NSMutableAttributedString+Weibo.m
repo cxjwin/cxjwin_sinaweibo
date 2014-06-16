@@ -55,6 +55,20 @@ static CGFloat widthCallback(void *refCon) {
 
 @end
 
+@implementation NSAttributedString (Weibo)
+
+- (CGSize)adjustSizeWithMaxWidth:(CGFloat)width {
+	CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self);
+	
+	CGSize maxSize = CGSizeMake(width, CGFLOAT_MAX);
+	CGSize size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, 0), NULL, maxSize, NULL);
+	
+	CFRelease(framesetter);
+	
+	return CGSizeMake(floor(size.width) + 1, floor(size.height) + 1);
+}
+
+@end
 
 @implementation NSMutableAttributedString (Weibo)
 
@@ -212,17 +226,6 @@ static CGFloat widthCallback(void *refCon) {
     [newStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:allTextRange];
     
 	return newStr;
-}
-
-- (CGSize)adjustSizeWithMaxWidth:(CGFloat)width {
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFMutableAttributedStringRef)self);
-    
-    CGSize maxSize = CGSizeMake(width, CGFLOAT_MAX);
-    CGSize size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, 0), NULL, maxSize, NULL);
-    
-    CFRelease(framesetter);
-    
-    return CGSizeMake(floor(size.width) + 1, floor(size.height) + 1);
 }
 
 @end

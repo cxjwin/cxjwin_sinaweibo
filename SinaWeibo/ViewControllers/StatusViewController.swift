@@ -67,45 +67,45 @@ class StatusViewController: UITableViewController {
     
     // #pragma mark - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView?) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
     
-    override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         return self.statuses.count
     }
-    
-    override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath?) -> UITableViewCell? {
-        if !tableView || !indexPath {
-            return nil
-        }
-        
+	
+    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell? {
         let identifier: String = "StatusCell"
         
-        var cell = tableView!.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath!) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as UITableViewCell
         cell.selectionStyle = .None
         
-        var status = self.statuses[indexPath!.row] as WeiboStatus
+        var status = self.statuses[indexPath.row] as WeiboStatus
         
         var subView = cell.contentView.viewWithTag(kStatusViewTag) as StatusView
         
         subView.status = status
+		
+		subView.setNeedsUpdateConstraints()
+		subView.updateConstraintsIfNeeded()
         
         return cell
     }
     
-    override func tableView(tableView: UITableView?, willDisplayCell: UITableViewCell?, forRowAtIndexPath: NSIndexPath?) {
-        var bounds = willDisplayCell!.contentView.bounds
-        var statusView = willDisplayCell!.contentView.viewWithTag(kStatusViewTag) as StatusView
+    override func tableView(tableView: UITableView!, willDisplayCell: UITableViewCell!, forRowAtIndexPath: NSIndexPath!) {
+        var bounds = willDisplayCell.contentView.bounds
+        var statusView = willDisplayCell.contentView.viewWithTag(kStatusViewTag) as StatusView
         statusView.frame = CGRect(x: 0, y: 0, width: CGRectGetWidth(bounds), height: CGRectGetHeight(bounds))
-        
-        statusView.updateConstraintsIfNeeded()
+		
+		statusView.setNeedsUpdateConstraints()
+		statusView.updateConstraintsIfNeeded()
     }
-    
+	
     override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat  {
         
         var height: CGFloat = 48.0
@@ -124,18 +124,12 @@ class StatusViewController: UITableViewController {
             let reTextHeight = status.retweetedStatus.contentTextSize.CGSizeValue().height
             height = 3 + height + reTextHeight  + 3
         }
-        
-        // single image
-        if status.pictureURLInStatus() is NSURL {
-            var imageHeight: CGFloat = status.previewImageSize.CGSizeValue().height
-            height = 3 + height + imageHeight + 3
-        }
-            // muti images
-        else if status.pictureURLInStatus() is NSMutableArray {
-            let imageHeight = status.previewImageSize.CGSizeValue().height
-            height = 3 + height + imageHeight + 3
-        }
-        
+		
+		let previewImageSize = status.previewImageSize.CGSizeValue();
+		if !CGSizeEqualToSize(previewImageSize, CGSizeZero) {
+			height = 9 + height + previewImageSize.height + 9
+		}
+		
         // height for tool bar
         height = 5 + height + 16 + 10
         

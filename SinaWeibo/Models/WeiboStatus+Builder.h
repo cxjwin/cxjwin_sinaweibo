@@ -24,4 +24,6 @@
 
 - (id)pictureURLInStatus;
 
+- (NSArray *)pictureURLStringsInStatus;
+
 @end

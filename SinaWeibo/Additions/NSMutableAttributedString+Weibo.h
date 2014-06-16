@@ -42,12 +42,16 @@ typedef enum CustomGlyphAttributeType {
 
 @end
 
+@interface NSAttributedString (Weibo)
+
+- (CGSize)adjustSizeWithMaxWidth:(CGFloat)width;
+
+@end
+
 @interface NSMutableAttributedString (Weibo)
 
 + (NSDictionary *)weiboEmojiDictionary;
 
 + (NSMutableAttributedString *)weiboAttributedStringWithString:(NSString *)string;
-
-- (CGSize)adjustSizeWithMaxWidth:(CGFloat)width;
 
 @end

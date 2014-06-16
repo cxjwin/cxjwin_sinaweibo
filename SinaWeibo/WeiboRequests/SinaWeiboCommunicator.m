@@ -26,11 +26,13 @@ NSTimeInterval kDefaultTimeoutIntervalForResource = 60;
 			defaultConfigObject.timeoutIntervalForResource = kDefaultTimeoutIntervalForResource;
 			NSString *cachePath = @"WeiboCacheDirectory";
 #ifdef DEBUG
+			/*
 			NSArray *myPathList = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
 			NSString *myPath = [myPathList objectAtIndex:0];
 			NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
 			NSString *fullCachePath = [[myPath stringByAppendingPathComponent:bundleIdentifier] stringByAppendingPathComponent:cachePath];
 			WBLog(@"Cache path: %@\n", fullCachePath);
+			 */
 #endif
 			NSURLCache *myCache =
 			    [[NSURLCache alloc] initWithMemoryCapacity:kOneMegaByte diskCapacity:256 * kOneMegaByte diskPath:cachePath];
