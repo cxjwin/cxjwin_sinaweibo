@@ -133,7 +133,7 @@
                             <rect key="frame" x="0.0" y="-38" width="320" height="120"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EH8-hi-e7Y">
+                                <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EH8-hi-e7Y" customClass="AvatarView" customModule="SinaWeibo" customModuleProvider="target">
                                     <rect key="frame" x="10" y="10" width="64" height="64"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="64" id="2yA-la-IJV"/>
@@ -180,11 +180,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MAG-sP-UME">
-                                <rect key="frame" x="10" y="74" width="64" height="64"/>
+                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MAG-sP-UME" customClass="AvatarView" customModule="SinaWeibo" customModuleProvider="target">
+                                <rect key="frame" x="9" y="73" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="KtO-fI-CfB"/>
-                                    <constraint firstAttribute="height" constant="64" id="XSp-cE-b9f"/>
+                                    <constraint firstAttribute="width" constant="64" id="a1z-uH-Ogh"/>
+                                    <constraint firstAttribute="height" constant="64" id="v8y-FC-HVa"/>
                                 </constraints>
                             </imageView>
                         </subviews>

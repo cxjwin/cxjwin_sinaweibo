@@ -131,7 +131,6 @@
 		5582239B17F8118100F2856C /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5582239A17F8118100F2856C /* QuickLook.framework */; };
 		5593F91E194AA00500A748B1 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593F91D194AA00500A748B1 /* MyInfoViewController.swift */; };
 		5593F921194AA45900A748B1 /* StatusImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5593F920194AA45900A748B1 /* StatusImageView.m */; };
-		55A1D64A194AC6F0008E27FF /* AvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A1D649194AC6F0008E27FF /* AvatarView.m */; };
 		55A9F9B617C1C1AA0075C950 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A9F9B517C1C1AA0075C950 /* Foundation.framework */; };
 		55A9F9B817C1C1AA0075C950 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A9F9B717C1C1AA0075C950 /* CoreGraphics.framework */; };
 		55A9F9BA17C1C1AA0075C950 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A9F9B917C1C1AA0075C950 /* UIKit.framework */; };
@@ -143,6 +142,7 @@
 		55A9F9D117C1C1AA0075C950 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A9F9B917C1C1AA0075C950 /* UIKit.framework */; };
 		55A9F9D917C1C1AA0075C950 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55A9F9D717C1C1AA0075C950 /* InfoPlist.strings */; };
 		55B1A1D617FD1534009FAD33 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55B1A1D517FD1534009FAD33 /* close@2x.png */; };
+		55B30D0219500DBB007D11DB /* StatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B30D0119500DBB007D11DB /* StatusImageView.swift */; };
 		55B4EC7D17F178CA0080D29E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B4EC7C17F178CA0080D29E /* AVFoundation.framework */; };
 		55C523EC17CF20D6006686DF /* test_user.txt in Resources */ = {isa = PBXBuildFile; fileRef = 55C523EB17CF20D6006686DF /* test_user.txt */; };
 		55CC5EE117CB502900B2E194 /* test_empty.txt in Resources */ = {isa = PBXBuildFile; fileRef = 55CC5EDE17CB502900B2E194 /* test_empty.txt */; };
@@ -151,6 +151,7 @@
 		55CC5EEA17CB602100B2E194 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CC5EE917CB602100B2E194 /* CoreData.framework */; };
 		55D0A30D1947F3AA00630EE7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D0A30C1947F3AA00630EE7 /* LoginViewController.swift */; };
 		55D6071319485A8600176BE2 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D6071219485A8600176BE2 /* UserInfoViewController.swift */; };
+		55D7AFCA194FE62400D70828 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D7AFC9194FE62400D70828 /* AvatarView.swift */; };
 		55DFE487194EF92E00918E3F /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DFE486194EF92E00918E3F /* LoadMoreView.swift */; };
 		55E3033417F01BDD00C433E1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E3033317F01BDD00C433E1 /* MainStoryboard.storyboard */; };
 		55FC6DCE17F581D2007DDC8A /* SeparateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FC6DC717F581D2007DDC8A /* SeparateView.m */; };
@@ -311,8 +312,6 @@
 		5593F91F194AA45900A748B1 /* StatusImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusImageView.h; sourceTree = "<group>"; };
 		5593F920194AA45900A748B1 /* StatusImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusImageView.m; sourceTree = "<group>"; };
 		55986A4A17C33FAE00D9343A /* RequestUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestUtilsTests.m; sourceTree = "<group>"; };
-		55A1D648194AC6F0008E27FF /* AvatarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarView.h; sourceTree = "<group>"; };
-		55A1D649194AC6F0008E27FF /* AvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarView.m; sourceTree = "<group>"; };
 		55A9F9B217C1C1AA0075C950 /* SinaWeibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SinaWeibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A9F9B517C1C1AA0075C950 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55A9F9B717C1C1AA0075C950 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -330,6 +329,8 @@
 		55A9F9D817C1C1AA0075C950 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55A9F9EA17C1C3260075C950 /* AppDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegateTests.m; sourceTree = "<group>"; };
 		55B1A1D517FD1534009FAD33 /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
+		55B30D0019500C9A007D11DB /* BridgingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingView.h; sourceTree = "<group>"; };
+		55B30D0119500DBB007D11DB /* StatusImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusImageView.swift; sourceTree = "<group>"; };
 		55B4EC7C17F178CA0080D29E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		55C523EB17CF20D6006686DF /* test_user.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_user.txt; sourceTree = "<group>"; };
 		55CC5EDE17CB502900B2E194 /* test_empty.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_empty.txt; sourceTree = "<group>"; };
@@ -339,6 +340,7 @@
 		55D0A3061947EAD700630EE7 /* SinaWeibo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SinaWeibo-Bridging-Header.h"; sourceTree = "<group>"; };
 		55D0A30C1947F3AA00630EE7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		55D6071219485A8600176BE2 /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		55D7AFC9194FE62400D70828 /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		55DFE486194EF92E00918E3F /* LoadMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
 		55E3033317F01BDD00C433E1 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		55FC6DC617F581D2007DDC8A /* SeparateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeparateView.h; sourceTree = "<group>"; };
@@ -688,8 +690,9 @@
 				55FC6DCB17F581D2007DDC8A /* StatusView.m */,
 				5593F91F194AA45900A748B1 /* StatusImageView.h */,
 				5593F920194AA45900A748B1 /* StatusImageView.m */,
-				55A1D648194AC6F0008E27FF /* AvatarView.h */,
-				55A1D649194AC6F0008E27FF /* AvatarView.m */,
+				55B30D0019500C9A007D11DB /* BridgingView.h */,
+				55B30D0119500DBB007D11DB /* StatusImageView.swift */,
+				55D7AFC9194FE62400D70828 /* AvatarView.swift */,
 				55DFE486194EF92E00918E3F /* LoadMoreView.swift */,
 			);
 			path = Views;
@@ -1013,8 +1016,8 @@
 				55FC6E0C17F5820F007DDC8A /* SinaWeiboCommunicator.m in Sources */,
 				55FC6E0A17F5820F007DDC8A /* SinaWeiboAuthorizeView.m in Sources */,
 				555DC61C18FD7AD500EAD474 /* CoreTextView.m in Sources */,
+				55B30D0219500DBB007D11DB /* StatusImageView.swift in Sources */,
 				55FC6E0E17F5820F007DDC8A /* SinaWeiboManager.m in Sources */,
-				55A1D64A194AC6F0008E27FF /* AvatarView.m in Sources */,
 				5593F91E194AA00500A748B1 /* MyInfoViewController.swift in Sources */,
 				558054E9194A890000BC232D /* WBWebViewController.swift in Sources */,
 				55D6071319485A8600176BE2 /* UserInfoViewController.swift in Sources */,
@@ -1024,6 +1027,7 @@
 				55FC6DF617F581F8007DDC8A /* WeiboStatus+Builder.m in Sources */,
 				55FC6DF817F581F8007DDC8A /* WeiboUser.m in Sources */,
 				55D0A30D1947F3AA00630EE7 /* LoginViewController.swift in Sources */,
+				55D7AFCA194FE62400D70828 /* AvatarView.swift in Sources */,
 				55FC6E1217F58275007DDC8A /* WeiboStatus.m in Sources */,
 				55FC6E0817F5820F007DDC8A /* RequestUtils.m in Sources */,
 				5572AF39194802330014CEAA /* WBTabBarController.swift in Sources */,

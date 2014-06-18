@@ -26,8 +26,9 @@ extern NSString *const kShowUserInfoNotification;
 extern NSString *const kLinkToURLNotification;
 
 @class WeiboStatus;
-@class AvatarView;
 @class StatusImageView;
+
+@class AvatarView;
 
 @interface StatusView : UIView <CoreTextViewDelegate>
 

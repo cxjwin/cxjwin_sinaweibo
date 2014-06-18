@@ -1,5 +1,5 @@
 //
-//  AvatarView.h
+//  BridgingView.h
 //  SinaWeibo
 //
 //  Created by cxjwin on 6/13/14.
@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+
+@class AvatarView;
 
 @interface AvatarView : UIImageView
 

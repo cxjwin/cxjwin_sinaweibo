@@ -10,9 +10,9 @@
 #import "StatusView.h"
 #import "WeiboStatus+Builder.h"
 #import "WeiboUser+Builder.h"
-#import "AvatarView.h"
 #import "StatusImageView.h"
 #import "NSMutableAttributedString+Weibo.h"
+#import "BridgingView.h"
 
 NSString *const kViewControllerWillPush = @"kViewControllerWillPush";
 NSString *const kShowOriginalPicNotification = @"kShowOriginalPicNotification";
