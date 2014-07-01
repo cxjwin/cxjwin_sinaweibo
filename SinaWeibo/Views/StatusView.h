@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <SDWebImage/SDWebImageManager.h>
 #import "CoreTextView.h"
-#import "SeparateView.h"
 
 extern NSString *const kShowOriginalPicNotification;
 extern NSString *const kThumbnailPicLoadedNotification;
@@ -29,6 +28,7 @@ extern NSString *const kLinkToURLNotification;
 @class StatusImageView;
 
 @class AvatarView;
+@class SeparateView;
 
 @interface StatusView : UIView <CoreTextViewDelegate>
 

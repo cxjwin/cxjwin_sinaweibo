@@ -10,7 +10,6 @@
 #import "StatusView.h"
 #import "WeiboStatus+Builder.h"
 #import "WeiboUser+Builder.h"
-#import "StatusImageView.h"
 #import "NSMutableAttributedString+Weibo.h"
 #import "BridgingView.h"
 
@@ -171,9 +170,9 @@ NSString *const kLinkToURLNotification = @"kLinkToURLNotification";
     }
     
     // image view
-	if (!CGSizeEqualToSize([self.imageView displaySize], CGSizeZero)) {
+	if (!CGSizeEqualToSize(self.imageView.displaySize, CGSizeZero)) {
 		top += 9;
-		CGSize size = [self.imageView displaySize];
+		CGSize size = self.imageView.displaySize;
 		CGFloat x = (CGRectGetWidth(self.frame) - size.width) * 0.5;
 		self.imageView.frame = CGRectMake(x, top, size.width, size.height);
 		top += size.height;

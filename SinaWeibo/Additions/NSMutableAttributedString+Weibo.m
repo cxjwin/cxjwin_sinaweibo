@@ -89,7 +89,7 @@ static CGFloat widthCallback(void *refCon) {
                                          options:NSRegularExpressionCaseInsensitive | NSRegularExpressionDotMatchesLineSeparators
                                            error:nil];
 	NSArray *emojis = [exp_emoji matchesInString:string
-	                                     options:NSRegularExpressionCaseInsensitive | NSRegularExpressionDotMatchesLineSeparators
+	                                     options:0
 	                                       range:NSMakeRange(0, [string length])];
     
 	NSMutableAttributedString *newStr = [[NSMutableAttributedString alloc] init];
@@ -154,7 +154,7 @@ static CGFloat widthCallback(void *refCon) {
                                          options:NSRegularExpressionCaseInsensitive | NSRegularExpressionDotMatchesLineSeparators
                                            error:nil];
 	NSArray *https = [exp_http matchesInString:__newStr
-	                                   options:NSRegularExpressionCaseInsensitive | NSRegularExpressionDotMatchesLineSeparators
+	                                   options:0
 	                                     range:NSMakeRange(0, [__newStr length])];
     
 	for (NSTextCheckingResult *result in https) {
@@ -177,7 +177,7 @@ static CGFloat widthCallback(void *refCon) {
                                            error:nil];
     NSArray *ats =
     [exp_at matchesInString:__newStr
-                    options:NSRegularExpressionCaseInsensitive | NSRegularExpressionDotMatchesLineSeparators
+                    options:0
                       range:NSMakeRange(0, [__newStr length])];
     for (NSTextCheckingResult *result in ats) {
         NSRange _range = [result range];

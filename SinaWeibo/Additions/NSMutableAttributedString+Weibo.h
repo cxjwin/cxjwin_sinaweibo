@@ -17,18 +17,12 @@ extern NSString *const kCustomGlyphAttributeImageName;
 extern NSString *const kCustomGlyphAttributeInfo;
 
 typedef enum CustomGlyphAttributeType {
-    CustomGlyphAttributeURL = 0,// URL
-    CustomGlyphAttributeAt,// @
-    CustomGlyphAttributeTopic,// ##
-    CustomGlyphAttributeImage,// image
-    CustomGlyphAttributeInfoImage,// 预留，给带相应信息的图片（如点击图片获取相关属性）
+    CustomGlyphAttributeURL = 0,	// URL
+    CustomGlyphAttributeAt,			// @
+    CustomGlyphAttributeTopic,		// ##
+    CustomGlyphAttributeImage,		// image
+    CustomGlyphAttributeInfoImage,	// 预留，给带相应信息的图片（如点击图片获取相关属性）
 } CustomGlyphAttributeType;
-
-//typedef struct CustomGlyphMetrics {
-//    CGFloat ascent;
-//    CGFloat descent;
-//    CGFloat width;
-//} CustomGlyphMetrics, *CustomGlyphMetricsRef;
 
 @interface CustomGlyphMetrics : NSObject
 
