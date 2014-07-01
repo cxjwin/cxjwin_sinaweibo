@@ -47,7 +47,7 @@ class SeparateView: UIView {
     }
     */
 
-	override func layoutSubviews()  {
+	override func layoutSubviews() {
 		super.layoutSubviews()
 		
 		self.label.sizeToFit()
