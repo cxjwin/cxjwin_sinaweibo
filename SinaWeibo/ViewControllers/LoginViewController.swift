@@ -13,12 +13,12 @@ class LoginViewController: UIViewController {
 	var observer: NSObjectProtocol?
 	
 	deinit {
-		NSNotificationCenter.defaultCenter().removeObserver(observer)
+		NSNotificationCenter.defaultCenter().removeObserver(observer!)
 	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
 		observer = 
 			NSNotificationCenter.defaultCenter().addObserverForName(kSinaWeiboDidLogInNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: {

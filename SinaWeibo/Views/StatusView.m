@@ -73,7 +73,7 @@ NSString *const kLinkToURLNotification = @"kLinkToURLNotification";
 	height += 30;
 	height += 9;
 
-	return height;
+	return ceil(height);
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

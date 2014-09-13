@@ -154,7 +154,6 @@
 		55DFE487194EF92E00918E3F /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DFE486194EF92E00918E3F /* LoadMoreView.swift */; };
 		55E3033417F01BDD00C433E1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55E3033317F01BDD00C433E1 /* MainStoryboard.storyboard */; };
 		55E687971962EB7300D3F1C1 /* StatusImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E687961962EB7300D3F1C1 /* StatusImageView.swift */; };
-		55E687991962F75700D3F1C1 /* NSMutableAttributedString+Weibo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E687981962F75700D3F1C1 /* NSMutableAttributedString+Weibo.swift */; };
 		55FC6DD217F581D2007DDC8A /* StatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FC6DCB17F581D2007DDC8A /* StatusView.m */; };
 		55FC6DF417F581F8007DDC8A /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FC6DEB17F581F8007DDC8A /* DatabaseManager.m */; };
 		55FC6DF617F581F8007DDC8A /* WeiboStatus+Builder.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FC6DED17F581F8007DDC8A /* WeiboStatus+Builder.m */; };
@@ -342,7 +341,6 @@
 		55DFE486194EF92E00918E3F /* LoadMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
 		55E3033317F01BDD00C433E1 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		55E687961962EB7300D3F1C1 /* StatusImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusImageView.swift; sourceTree = "<group>"; };
-		55E687981962F75700D3F1C1 /* NSMutableAttributedString+Weibo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Weibo.swift"; sourceTree = "<group>"; };
 		55FC6DCA17F581D2007DDC8A /* StatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusView.h; sourceTree = "<group>"; };
 		55FC6DCB17F581D2007DDC8A /* StatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusView.m; sourceTree = "<group>"; };
 		55FC6DEA17F581F8007DDC8A /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
@@ -406,7 +404,6 @@
 			children = (
 				555DC62418FD7B1D00EAD474 /* NSMutableAttributedString+Weibo.h */,
 				555DC62518FD7B1D00EAD474 /* NSMutableAttributedString+Weibo.m */,
-				55E687981962F75700D3F1C1 /* NSMutableAttributedString+Weibo.swift */,
 			);
 			path = Additions;
 			sourceTree = "<group>";
@@ -1014,7 +1011,6 @@
 				555DC61C18FD7AD500EAD474 /* CoreTextView.m in Sources */,
 				55FC6E0E17F5820F007DDC8A /* SinaWeiboManager.m in Sources */,
 				5593F91E194AA00500A748B1 /* MyInfoViewController.swift in Sources */,
-				55E687991962F75700D3F1C1 /* NSMutableAttributedString+Weibo.swift in Sources */,
 				558054E9194A890000BC232D /* WBWebViewController.swift in Sources */,
 				55D6071319485A8600176BE2 /* UserInfoViewController.swift in Sources */,
 				551AE53617C1F92300A9719C /* AppDelegate.m in Sources */,

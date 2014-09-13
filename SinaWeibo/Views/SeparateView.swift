@@ -16,7 +16,7 @@ class SeparateView: UIView {
 	var leftLine: UIView!
 	var rightLine: UIView!
 	
-    init(frame: CGRect) {
+    override init(frame: CGRect) {
 		self.leftLine = UIView()
 		self.leftLine.backgroundColor = UIColor.grayColor()
 		
@@ -36,6 +36,10 @@ class SeparateView: UIView {
 		self.addSubview(self.leftLine)
 		self.addSubview(self.rightLine)
 		self.addSubview(self.label)
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     /*

@@ -27,14 +27,8 @@ class AvatarView: UIImageView {
 				
 				var completed: (image: UIImage?, error: NSError?, cacheType: SDImageCacheType, finished: Bool) -> Void = {
 					[weak self] (image: UIImage?, error: NSError?, cacheType: SDImageCacheType, finished: Bool) in
-					if image {
-						if !self {
-							return;
-						}
-						
-						dispatch_async(dispatch_get_main_queue(), {
-							self!.image = image!
-							})
+					if (image != nil) {
+                        self?.image = image
 					}
 				}
 				
@@ -44,9 +38,13 @@ class AvatarView: UIImageView {
 	}
 	}
 	
-    init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     /*

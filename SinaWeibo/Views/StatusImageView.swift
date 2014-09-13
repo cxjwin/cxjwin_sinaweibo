@@ -13,31 +13,36 @@ class URLImageView: UIImageView {
     var URLString: String? {
     didSet {
         var avatarURL: NSURL? = nil
-        if (URLString) {
-            avatarURL = NSURL.URLWithString(URLString)
+        if (URLString != nil) {
+            avatarURL = NSURL.URLWithString(URLString!)
         }
         
         if let tempURL = avatarURL {
             let manager = SDWebImageManager.sharedManager()
             var image: UIImage? = manager.imageCache.imageFromDiskCacheForKey(tempURL.absoluteString)
-            if image {
+            if (image != nil) {
                 self.image = image!
             } else {
                 self.image = nil
                 
                 manager.downloadWithURL(tempURL, options: .CacheMemoryOnly, progress: nil, completed: {
                     [weak self] (image: UIImage?, error: NSError?, cacheType: SDImageCacheType, finished: Bool) in
-                    if image {
-                        self!.exchangeImage(image!)
+                    if (image != nil) {
+                        self?.exchangeImage(image!)
                     }
                     });
             }
         }
     }
     }
-    init(frame: CGRect) {
+    
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.contentMode = .ScaleAspectFit
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func exchangeImage(image: UIImage) {
@@ -67,7 +72,7 @@ class StatusImageView: UIView {
         displaySize = CGSizeZero
         self.imagesView.removeAllObjects()
         
-        let count = URLStrings ? URLStrings!.count : 0
+        let count = URLStrings != nil ? URLStrings!.count : 0;
         
         if count == 1 {
             displaySize = CGSizeMake(100, 100)
@@ -84,7 +89,7 @@ class StatusImageView: UIView {
             var x: CGFloat = 0.0
             var y: CGFloat = 0.0
             
-            for i in 0..count {
+            for i in 0..<count {
                 var imageView = URLImageView(frame: CGRect(x: x, y: y, width: singleImageWidth, height: singleImageWidth))
                 imageView.URLString = URLStrings!.objectAtIndex(i) as? String
                 self.addSubview(imageView)
@@ -103,9 +108,13 @@ class StatusImageView: UIView {
     }
     }
     
-    init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     /*

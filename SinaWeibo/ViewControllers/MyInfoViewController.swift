@@ -28,12 +28,12 @@ class MyInfoViewController: UITableViewController {
 		let communicator = SinaWeiboManager.defaultManager().communicator
 		let curUser = SinaWeiboManager.defaultManager().user
 
-		var imageView = self.tableView.tableHeaderView.viewWithTag(kMyAvatarViewTag) as UIImageView
+		var imageView = self.tableView.tableHeaderView?.viewWithTag(kMyAvatarViewTag) as UIImageView
 		
 		var avatarUrl: NSURL?
 		
-		if curUser.profileImageUrl {
-			if curUser.avatarLarge {
+		if (curUser.profileImageUrl != nil) {
+			if (curUser.avatarLarge != nil) {
 				avatarUrl = NSURL(string: curUser.avatarLarge)
 			} else {
 				avatarUrl = NSURL(string: curUser.profileImageUrl)
@@ -47,10 +47,10 @@ class MyInfoViewController: UITableViewController {
 			
 			var response:NSCachedURLResponse? = URLCache?.cachedResponseForRequest(request)
 			
-			if response {
+			if (response != nil) {
 				var data:NSData? = response!.data
-				if data {
-					var image = UIImage(data: data)
+				if (data != nil) {
+					var image = UIImage(data: data!)
 					println("\(image)")
 					imageView.image = image
 				}
@@ -59,7 +59,7 @@ class MyInfoViewController: UITableViewController {
 					[weak imageView] (data: NSData?, _, _) in
 					if data?.length > 0 {
 						NSOperationQueue.mainQueue().addOperationWithBlock{
-							var image = UIImage(data: data)
+							var image = UIImage(data: data!)
 							println("\(image)")
 							imageView!.image = image
 						}

@@ -35,7 +35,7 @@ class StatusViewController: UITableViewController {
         self.removeObservers()
     }
 	
-	init(coder aDecoder: NSCoder!) {
+	required init(coder aDecoder: NSCoder) {
 		isLoading = false
 		super.init(coder: aDecoder)
 	}
@@ -55,15 +55,15 @@ class StatusViewController: UITableViewController {
 		
         let tableFooterViewFrame = CGRect(x: 0, y: 0, width: CGRectGetWidth(self.tableView.frame), height: 1)
         self.tableView.tableFooterView = UIView(frame: tableFooterViewFrame)
-        self.tableView.tableFooterView.backgroundColor = UIColor.whiteColor()
+        self.tableView.tableFooterView?.backgroundColor = UIColor.whiteColor()
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: Selector("refreshControlValueChanged"), forControlEvents: .ValueChanged)
+        self.refreshControl?.addTarget(self, action: Selector("refreshControlValueChanged"), forControlEvents: .ValueChanged)
 		
 		loadMoreView.frame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), 30)
 		
         let user = SinaWeiboManager.defaultManager().user
-        if user.screenName {
+        if (user.screenName != nil) {
             self.title = user.screenName
         } else {
             self.title = "ME"
@@ -79,23 +79,21 @@ class StatusViewController: UITableViewController {
     
     // #pragma mark - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
     
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
 		let count = self.statuses.count
 		
-		
-		
         return self.statuses.count
     }
 	
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell? {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let identifier: String = "StatusCell"
         
         var cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as UITableViewCell
@@ -110,55 +108,12 @@ class StatusViewController: UITableViewController {
         return cell
     }
 	
-    override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat  {
-		var status = self.statuses[indexPath!.row] as WeiboStatus
-		return StatusView.contentHeightWithStatus(status);
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat  {
+		var status = self.statuses[indexPath.row] as WeiboStatus
+        let height = StatusView.contentHeightWithStatus(status)
+        
+		return height
     }
-	
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView?, canEditRowAtIndexPath indexPath: NSIndexPath?) -> Bool {
-    // Return NO if you do not want the specified item to be editable.
-    return true
-    }
-    */
-    
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView?, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath?) {
-    if editingStyle == .Delete {
-    // Delete the row from the data source
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    } else if editingStyle == .Insert {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-    }
-    */
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView?, moveRowAtIndexPath fromIndexPath: NSIndexPath?, toIndexPath: NSIndexPath?) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView?, canMoveRowAtIndexPath indexPath: NSIndexPath?) -> Bool {
-    // Return NO if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // #pragma mark - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    }
-    */
     
     func loadStatusesDataFromDB() {
         var sql: NSString = NSString(string: "select * from statuses_data;")
@@ -170,7 +125,7 @@ class StatusViewController: UITableViewController {
         while (resultSet.next()) {
             var data = resultSet.dataForColumnIndex(0)
             var statuses = WeiboStatus.statusesFromJSONData(data, error: nil)
-            if (statuses) {
+            if (statuses != nil) {
                 self.statuses.addObjectsFromArray(statuses)
             } else {
                 // Do nothing
@@ -186,28 +141,28 @@ class StatusViewController: UITableViewController {
     
     func loadStatusesData() {
         self.communicator.getWeiboStatusesWithPage(1, completionHandler: {
-            [weak self] (data: NSData?, response: NSURLResponse?, error: NSError?) in
+            [unowned self] (data: NSData?, response: NSURLResponse?, error: NSError?) in
             
-            if self!.refreshControl.refreshing {
-                self!.refreshControl.endRefreshing()
+            if (self.refreshControl?.refreshing == true) {
+                self.refreshControl?.endRefreshing()
             }
             
-            if error {
+            if (error != nil) {
                 NSLog("%@", error!.localizedDescription)
 				return;
             }
             
             var statuses: NSMutableArray? = WeiboStatus.statusesWithPreviewImageSizeFromJSONData(data, error: nil)
             
-            if statuses && statuses?.count > 0 {
-                self!.dataArray.removeAllObjects()
-                self!.dataArray.addObject(data)
-                self!.nextPage = 2
-                self!.statuses = statuses!
+            if (statuses != nil && statuses?.count > 0) {
+                self.dataArray.removeAllObjects()
+                self.dataArray.addObject(data!)
+                self.nextPage = 2
+                self.statuses = statuses!
                 
-                dispatch_async(dispatch_get_main_queue(), {
-                    self!.tableView.reloadData()
-                    })
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.tableView.reloadData();
+                })
             }
             })
     }
@@ -217,7 +172,7 @@ class StatusViewController: UITableViewController {
 	}
     
     func refreshControlValueChanged() {
-        if self.refreshControl.refreshing {
+        if (self.refreshControl?.refreshing == true) {
             self.loadStatusesData()
         }
     }
@@ -286,7 +241,7 @@ class StatusViewController: UITableViewController {
                 var storyBoard = UIStoryboard(name: "MainStoryboard", bundle: NSBundle.mainBundle())
                 var viewController = storyBoard.instantiateViewControllerWithIdentifier("UserInfoViewController") as UserInfoViewController
                 viewController.user = user
-                self.navigationController.pushViewController(viewController, animated: true)
+                self.navigationController?.pushViewController(viewController, animated: true)
                 
                 })
             self.observers.addObject(observer)

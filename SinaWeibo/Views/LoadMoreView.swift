@@ -22,7 +22,7 @@ class LoadMoreView: UIView {
 	}
 	}
 	
-    init(frame: CGRect) {
+    override init(frame: CGRect) {
 		isLoading = false
 		indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
 		
@@ -32,8 +32,10 @@ class LoadMoreView: UIView {
 		self.backgroundColor = UIColor.yellowColor()
 		indicatorView.center = self.center
 		self.addSubview(indicatorView)
-		
-		self.window
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     /*

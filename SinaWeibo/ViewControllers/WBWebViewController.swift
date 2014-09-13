@@ -10,7 +10,7 @@ import UIKit
 
 class WBWebViewController: UIViewController {
 
-	@IBOutlet var webView : UIWebView
+	@IBOutlet var webView : UIWebView?
 	
 	var URLString: String?
 
@@ -27,7 +27,7 @@ class WBWebViewController: UIViewController {
 		if let URLString = self.URLString {
 			var URL = NSURL(string: URLString)
 			var request = NSURLRequest(URL: URL)
-			self.webView.loadRequest(request)
+			self.webView?.loadRequest(request)
 		} else {
 			println("url string is nil...")
 		}

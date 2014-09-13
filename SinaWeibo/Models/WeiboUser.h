@@ -16,7 +16,7 @@
 @property (copy, nonatomic) NSString *province;
 @property (copy, nonatomic) NSString *city;
 @property (copy, nonatomic) NSString *location;
-@property (copy, nonatomic) NSString *description;
+@property (copy, nonatomic) NSString *userDescription;
 @property (copy, nonatomic) NSString *url;
 @property (copy, nonatomic) NSString *profileUrl;
 @property (copy, nonatomic) NSString *profileImageUrl;

@@ -9,7 +9,7 @@
 #import "CoreTextView.h"
 #import "NSMutableAttributedString+Weibo.h"
 
-CGFloat kContentTextWidth = 250.0;
+CGFloat kContentTextWidth = 250;
 
 const CFIndex kNoTouchIndex = -1;
 const CGPoint kErrorPoint = {.x = CGFLOAT_MAX, .y = CGFLOAT_MAX};

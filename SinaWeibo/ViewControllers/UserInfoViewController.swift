@@ -14,7 +14,7 @@ class UserInfoViewController: UIViewController {
     
     var user: WeiboUser?
     
-    @IBOutlet var imageView : UIImageView
+    @IBOutlet var imageView : UIImageView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,13 +22,13 @@ class UserInfoViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.whiteColor()
         
-        self.view.addSubview(self.imageView)
+        self.view.addSubview(self.imageView!)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !self.user {
+        if (self.user == nil) {
             return
         }
         
@@ -36,8 +36,8 @@ class UserInfoViewController: UIViewController {
         
         var avatarUrl: NSURL?
         
-        if curUser.profileImageUrl {
-            if curUser.avatarLarge {
+        if (curUser.profileImageUrl != nil) {
+            if (curUser.avatarLarge != nil) {
                 avatarUrl = NSURL(string: curUser.avatarLarge)
             } else {
                 avatarUrl = NSURL(string: curUser.profileImageUrl)
@@ -51,21 +51,21 @@ class UserInfoViewController: UIViewController {
             
             var response:NSCachedURLResponse? = URLCache?.cachedResponseForRequest(request)
             
-            if response {
+            if (response != nil) {
                 var data:NSData? = response!.data
-                if data {
-                    var image = UIImage(data: data)
+                if (data != nil) {
+                    var image = UIImage(data: data!)
                     println("\(image)")
-                    self.imageView.image = image
+                    self.imageView?.image = image
                 }
             } else {
                 self.communicator.downloadImageWithURL(url, downloadCompletionHandler: {
                     [weak self] (data: NSData?, _, _) in
                     if data?.length > 0 {
                         NSOperationQueue.mainQueue().addOperationWithBlock{
-                            var image = UIImage(data: data)
+                            var image = UIImage(data: data!)
                             println("\(image)")
-                            self!.imageView.image = image
+                            self!.imageView?.image = image
                         }
                     }
                     })

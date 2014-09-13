@@ -25,7 +25,7 @@
     DatabaseManager *manager = [DatabaseManager defaultManager];
     [manager.database open];
     [manager checkAndCreateTables];
-    
+
     return YES;
 }
 

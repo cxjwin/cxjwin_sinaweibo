@@ -10,29 +10,29 @@
 	<string>SinaWeibo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>BBE4CC6D-822B-4C36-AFDF-5383EF1018C6</key>
+		<key>772E2C836ED848420C308535325C8EF0DA039E39</key>
 		<string>https://github.com/cxjwin/cxjwin_sinaweibo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>SinaWeibo.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>BBE4CC6D-822B-4C36-AFDF-5383EF1018C6</key>
+		<key>772E2C836ED848420C308535325C8EF0DA039E39</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/cxjwin/cxjwin_sinaweibo.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>BBE4CC6D-822B-4C36-AFDF-5383EF1018C6</string>
+	<string>772E2C836ED848420C308535325C8EF0DA039E39</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>BBE4CC6D-822B-4C36-AFDF-5383EF1018C6</string>
+			<string>772E2C836ED848420C308535325C8EF0DA039E39</string>
 			<key>IDESourceControlWCCName</key>
 			<string>cxjwin_sinaweibo</string>
 		</dict>

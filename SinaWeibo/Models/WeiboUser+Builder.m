@@ -18,7 +18,7 @@
 		self.province = [info objectForKey:@"province"];
 		self.city = [info objectForKey:@"city"];
 		self.location = [info objectForKey:@"location"];
-		self.description = [info objectForKey:@"description"];
+		self.userDescription = [info objectForKey:@"description"];
 		self.url = [info objectForKey:@"url"];
 		self.profileUrl = [info objectForKey:@"profile_url"];
 		self.profileImageUrl = [info objectForKey:@"profile_image_url"];
